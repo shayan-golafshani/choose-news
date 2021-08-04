@@ -5,11 +5,11 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src='https://thisartworkdoesnotexist.com/' className="App-logo" alt="logo" />
+        Tha-Zen Box!
       </header>
       <main>
         <section className="spinning-photo">
-
+          <img src='https://thisartworkdoesnotexist.com/' className="App-logo" alt="logo" />
         </section>
 
       </main>
