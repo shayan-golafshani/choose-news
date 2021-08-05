@@ -16,6 +16,10 @@ function App() {
     getPoem()    
   },[])
 
+  let poem = mainPoem.map(line => {
+    return <p>{line}</p>
+  }) 
+
   return (
     <div className="App">
       <header className="App-header">
@@ -26,9 +30,9 @@ function App() {
           <img src='https://thisartworkdoesnotexist.com/' className="App-logo" alt="logo" />
         </section>
         <section>
-          <p>{
-          //affirmation
-          }</p>
+          <section className='main-poem'>
+            {poem}
+          </section >
         </section>
 
       </main>
