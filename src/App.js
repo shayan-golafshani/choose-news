@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 
 function App() {
@@ -10,6 +10,11 @@ function App() {
       <main>
         <section className="spinning-photo">
           <img src='https://thisartworkdoesnotexist.com/' className="App-logo" alt="logo" />
+        </section>
+        <section>
+          <p>{
+          //affirmation
+          }</p>
         </section>
 
       </main>
