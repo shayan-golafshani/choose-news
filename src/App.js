@@ -6,9 +6,12 @@ function App() {
   const [errMessage, setErrMessage] = useState('');
 
   const getPoem = () => {   
-      fetch('https://poetrydb.org/title/Ozymandias/lines')
+      fetch('https://poetrydb.org/random')
       .then(response => response.json())
-      .then(jsondata => setMainPoem(jsondata[0].lines))
+      .then(jsondata => {
+        
+        console.log(jsondata)
+        setMainPoem(jsondata[0].lines)})
       .catch(err => console.error(err));
 }
     
