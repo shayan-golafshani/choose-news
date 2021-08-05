@@ -8,6 +8,12 @@ function App() {
   const [errMessage, setErrMessage] = useState('');
 
 
+  const getAffirmation = () => {
+    fetch("https://www.affirmations.dev")
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(err => console.error(err));
+  }
   
 
   return (
