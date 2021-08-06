@@ -45,7 +45,8 @@ export const tracks = [
     'https://soundcloud.com/chillhopdotcom/fujitsu-azure?in=chillhopdotcom/sets/lofihiphop',
     'https://soundcloud.com/tusken_ibk/winterrain?in=chillhopdotcom/sets/lofihiphop',
     'https://soundcloud.com/plusma/plusma-monza?in=chillhopdotcom/sets/lofihiphop',
-    
-
-    
+    'https://soundcloud.com/chillhopdotcom/moose-dawa-bravo?in=chillhopdotcom/sets/lofihiphop',
+    'https://soundcloud.com/chillhopdotcom/otesla-east?in=chillhopdotcom/sets/lofihiphop',
+    'https://soundcloud.com/chillhopdotcom/otesla-east?in=chillhopdotcom/sets/lofihiphop',
+    'https://soundcloud.com/emune/contigo?in=chillhopdotcom/sets/lofihiphop',
 ]
