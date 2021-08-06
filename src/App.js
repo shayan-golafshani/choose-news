@@ -43,7 +43,7 @@ function App() {
             <img src='https://thisartworkdoesnotexist.com/' className="App-logo" alt="logo" />
           }
         </section>
-        <section>
+        <section className='audio-player'>
           <ReactPlayer
             url={tracks[0]}
           />
