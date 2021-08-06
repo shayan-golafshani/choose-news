@@ -36,7 +36,7 @@ function App() {
       <main>
         <section className="spinning-photo">
           {
-      //      <img src='https://thisartworkdoesnotexist.com/' className="App-logo" alt="logo" />
+            <img src='https://thisartworkdoesnotexist.com/' className="App-logo" alt="logo" />
           }
         </section>
         <section>
