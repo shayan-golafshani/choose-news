@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { Route, Switch, NavLink, Link } from 'react-router-dom';
 
 import ReactPlayer from "react-player"
-import { tracks } from './data/tracks';
+import { tracks } from '../../data/tracks'
 import './App.css';
 
 
@@ -45,9 +45,12 @@ function App() {
         </button>
       </NavLink>
 
+
+      <NavLink to='/'>
         <button>
           Randomize Me
         </button>
+      </NavLink>
 
         <button>
           Songs
