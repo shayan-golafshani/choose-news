@@ -24,8 +24,11 @@ function App() {
 
   },[])
 
-  let poem = mainPoem.map(line => {
-    return <p>{line}</p>
+  let poem = mainPoem.map((line, index) => {
+    //console.log(index)
+    return  <p key={index}>
+              {line}
+            </p>
   }) 
 
   return (
