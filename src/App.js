@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import { NavLink } from 'react-router-dom';
+import { Route, Switch, NavLink, Link } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 import ReactPlayer from "react-player"
 import { tracks } from './tracks';
@@ -20,33 +21,30 @@ function App() {
       .catch(err => console.error(err));
 }
 
-    
   useEffect(() => {
     getPoem()
-
   },[])
 
   let poem = mainPoem.map((line, index) => {
-    //console.log(index)
     return  <p key={index}>
               {line}
             </p>
   }) 
 
   return (
+    
     <div className="App">
       <header className="App-header">
         <p>
-        Tha-Zen Box!
+          Tha-Zen Box!
         </p>
-
       <section className='Nav-links'>
 
-      <NavLink  to='/poems'>
+      <Link to='/poems'>
         <button>
           Poems
         </button>
-      </NavLink>
+      </Link>
 
         <button>
           Randomize Me
@@ -63,21 +61,24 @@ function App() {
 
       </header>
       <main>
-        <section className="spinning-photo">
-          {
-            <img src='https://thisartworkdoesnotexist.com/' className="App-logo" alt="logo" />
-          }
-        </section>
-        <section className='main-poem'>
-          {poem}
-        </section >
+      <Switch>
+        <Route exact path='/'>
+          <section className="spinning-photo">
+            {<img src='https://thisartworkdoesnotexist.com/' className="App-logo" alt="logo" />}
+          </section>
+          <section className='main-poem'>
+            {poem}
+          </section >
+          <section className='audio-player'>
+            <ReactPlayer
+              url={tracks[0]}
+            />
+          </section>
+        </Route>
 
-        <section className='audio-player'>
-          <ReactPlayer
-            url={tracks[0]}
-          />
-        </section>
-          
+        <Route exact path ='/poems'>
+        </Route>
+      </Switch>
       </main>
     </div>
   );
