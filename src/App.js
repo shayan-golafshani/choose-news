@@ -43,16 +43,16 @@ function App() {
             <img src='https://thisartworkdoesnotexist.com/' className="App-logo" alt="logo" />
           }
         </section>
+        <section className='main-poem'>
+          {poem}
+        </section >
+
         <section className='audio-player'>
           <ReactPlayer
             url={tracks[0]}
           />
         </section>
           
-        <section className='main-poem'>
-          {poem}
-        </section >
-
       </main>
     </div>
   );
