@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Route, Switch, NavLink, Link } from 'react-router-dom';
 
-//import ReactPlayer from "react-player"
-//import { tracks } from '../../data/tracks'
-import './App.css';
+import './Poems.css';
 
 
 function Poem() {
