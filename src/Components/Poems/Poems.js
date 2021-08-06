@@ -6,21 +6,24 @@ import './Poems.css';
 
 function Poem() {
   
+  const [allAuthors, setAllAuthors] = useState([]);
+  const [selectedAuthor, setSelectedAuthor] = useState('');
   const [allPoems, setAllPoems] = useState([]);
   const [errMessage, setErrMessage] = useState('');
 
-  const getPoem = () => {   
-      fetch('https://poetrydb.org/random')
+  const getAuthors = () => {   
+      fetch('https://poetrydb.org/author')
       .then(response => response.json())
       .then(jsondata => {
         
         console.log(jsondata)
-        setMainPoem(jsondata[0].lines)})
+        setAllAuthors(jsondata)})
       .catch(err => console.error(err));
 }
 
   useEffect(() => {
-    getPoem()
+    getAuthors()
+    
   },[])
 
   let poem = mainPoem.map((line, index) => {
