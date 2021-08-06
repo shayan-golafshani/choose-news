@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import { NavLink } from 'react-router-dom';
 
 import ReactPlayer from "react-player"
 import { tracks } from './tracks';
@@ -41,9 +42,11 @@ function App() {
 
       <section className='Nav-links'>
 
+      <NavLink  to='/poems'>
         <button>
           Poems
         </button>
+      </NavLink>
 
         <button>
           Randomize Me
