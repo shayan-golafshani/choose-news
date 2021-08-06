@@ -35,6 +35,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         Tha-Zen Box!
+
       </header>
       <main>
         <section className="spinning-photo">
@@ -46,11 +47,11 @@ function App() {
           <ReactPlayer
             url={tracks[0]}
           />
-          </section>
+        </section>
           
-          <section className='main-poem'>
-            {poem}
-          </section >
+        <section className='main-poem'>
+          {poem}
+        </section >
 
       </main>
     </div>
