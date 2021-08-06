@@ -1,12 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import ReactPlayer from "react-player"
-
-//import SC from 'soundcloud';
-//import { client_id } from './auth';
 import { tracks } from './tracks';
 import './App.css';
 
-//SC.initialize({client_id: client_id});
 
 function App() {
   const [mainPoem, setMainPoem] = useState([]);
@@ -22,18 +18,10 @@ function App() {
       .catch(err => console.error(err));
 }
 
-  // const getSCTrack = () => {
-  //   SC.get('/tracks', {
-  //         q: 'buskers', genres: 'Rock'
-  //       }).then(function(tracks) {
-  //         console.log(tracks);
-  //       });
-  // }
-
     
   useEffect(() => {
     getPoem()
-    //getSCTrack()    
+
   },[])
 
   let poem = mainPoem.map(line => {
@@ -48,7 +36,7 @@ function App() {
       <main>
         <section className="spinning-photo">
           {
-            //<img src='https://thisartworkdoesnotexist.com/' className="App-logo" alt="logo" />
+      //      <img src='https://thisartworkdoesnotexist.com/' className="App-logo" alt="logo" />
           }
         </section>
         <section>
