@@ -26,6 +26,11 @@
   text-align: center;
 }
 
+.Nav-links {
+  display: flex;
+  justify-content: space-around;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
