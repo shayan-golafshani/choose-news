@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import ReactPlayer from "react-player"
 import './App.css';
 
 function App() {
@@ -33,6 +34,9 @@ function App() {
           <img src='https://thisartworkdoesnotexist.com/' className="App-logo" alt="logo" />
         </section>
         <section>
+          <ReactPlayer
+            url="https://soundcloud.com/glennmorrison/beethoven-moonlight-sonata"
+          />
           <section className='main-poem'>
             {poem}
           </section >
