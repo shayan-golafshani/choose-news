@@ -1,6 +1,12 @@
+import { SCOPABLE_TYPES } from '@babel/types';
 import React, {useEffect, useState} from 'react';
 import ReactPlayer from "react-player"
+
+import SC from 'soundcloud';
+import { client_id } from './auth';
 import './App.css';
+
+SC.initialize({client_id});
 
 function App() {
   const [mainPoem, setMainPoem] = useState([]);
@@ -15,6 +21,9 @@ function App() {
         setMainPoem(jsondata[0].lines)})
       .catch(err => console.error(err));
 }
+
+S
+
     
   useEffect(() => {
     getPoem()    
