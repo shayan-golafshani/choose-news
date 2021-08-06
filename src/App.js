@@ -3,9 +3,10 @@ import ReactPlayer from "react-player"
 
 import SC from 'soundcloud';
 import { client_id } from './auth';
+import { tracks } from './tracks';
 import './App.css';
 
-SC.initialize({client_id});
+SC.initialize({client_id: client_id});
 
 function App() {
   const [mainPoem, setMainPoem] = useState([]);
@@ -21,11 +22,18 @@ function App() {
       .catch(err => console.error(err));
 }
 
-S
+  const getSCTrack = () => {
+    SC.get('/tracks', {
+          q: 'buskers', genres: 'Rock'
+        }).then(function(tracks) {
+          console.log(tracks);
+        });
+  }
 
     
   useEffect(() => {
-    getPoem()    
+    getPoem()
+    //getSCTrack()    
   },[])
 
   let poem = mainPoem.map(line => {
@@ -39,16 +47,19 @@ S
       </header>
       <main>
         <section className="spinning-photo">
-          <img src='https://thisartworkdoesnotexist.com/' className="App-logo" alt="logo" />
+          {
+            //<img src='https://thisartworkdoesnotexist.com/' className="App-logo" alt="logo" />
+          }
         </section>
         <section>
           <ReactPlayer
-            url="https://soundcloud.com/glennmorrison/beethoven-moonlight-sonata"
+            url={tracks[0]}
           />
+          </section>
+          
           <section className='main-poem'>
             {poem}
           </section >
-        </section>
 
       </main>
     </div>
