@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+
 import ReactPlayer from "react-player"
 import { tracks } from './tracks';
 import './App.css';
@@ -34,7 +35,28 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <p>
         Tha-Zen Box!
+        </p>
+
+      <section className='Nav-links'>
+
+        <button>
+          Poems
+        </button>
+
+        <button>
+          Randomize Me
+        </button>
+
+        <button>
+          Songs
+        </button>
+
+        <button>
+          Meditation
+        </button>
+      </section>
 
       </header>
       <main>
