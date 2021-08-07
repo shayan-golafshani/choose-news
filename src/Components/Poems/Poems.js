@@ -23,7 +23,7 @@ function Poem() {
 
   useEffect(() => {
     getAuthors()
-    
+
   },[])
 
   let poem = mainPoem.map((line, index) => {
@@ -31,6 +31,17 @@ function Poem() {
               {line}
             </p>
   }) 
+
+  let dropdown = (
+    
+    <select name="author" id="authors">
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+    <option value="mercedes">Mercedes</option>
+    <option value="audi">Audi</option>
+  </select>
+
+  )
 
   return (
     
