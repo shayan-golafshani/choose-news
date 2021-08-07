@@ -46,15 +46,27 @@ function Poem() {
 
   
   let options = allAuthors.map((author, index) => <option key={index} value={author}>{author}</option>)
+  let poetryCards = selectedAuthorPoems.map((poem, index) => {
+
+    return <PoemCard
+            index={index}
+            title={poem.title}
+            author={poem.author}
+            lines={poem.lines}
+            linecount={poem.linecount}
+            key={index}
+           />
+  })
 
   return (
-    <section>
+    <section className='poetry'>
       <select 
         name="author"
         id="author"
         onChange={e => setSelectedAuthor(e.target.value)}>
         {options}
       </select>
+      {!!poetryCards.length && poetryCards}
     </section>
   );
 }
