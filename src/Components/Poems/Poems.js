@@ -8,8 +8,23 @@ function Poem() {
   const [allAuthors, setAllAuthors] = useState([]);
   const [selectedAuthor, setSelectedAuthor] = useState('');
   const [selectedAuthorPoems , setSelectedAuthorPoems] = useState([]);
-  const [allPoems, setAllPoems] = useState([]);
+  // not using this state yet.
+  //const [allPoems, setAllPoems] = useState([]);
   const [errMessage, setErrMessage] = useState('');
+
+
+  const addToFaves = (e) => {
+    console.log(e, 'THIS is the id of the card clicked maybe we can match it up with the card')
+    let matchedPoem = selectedAuthorPoems.filter((poem, index) => {
+
+      console.log("This is each poem:", poem, '/n This is each poem index:', index)
+
+      return index === parseInt(e.target.id)
+    })
+    console.log("This is the matched poem",matchedPoem);
+
+    
+  }
 
   const getAuthors = () => {   
       fetch('https://poetrydb.org/author')
@@ -20,9 +35,6 @@ function Poem() {
         setAllAuthors(jsondata.authors)})
       .catch(err => console.error(err));
   }
-
-  
-  //getAuthorPoems(setSelectedAuthor)
   
   useEffect(() => {
     getAuthors()
@@ -49,6 +61,7 @@ function Poem() {
   let poetryCards = selectedAuthorPoems.map((poem, index) => {
 
     return <PoemCard
+            addToFaves={addToFaves}
             index={index}
             title={poem.title}
             author={poem.author}
