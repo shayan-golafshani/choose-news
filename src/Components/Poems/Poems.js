@@ -17,13 +17,12 @@ function Poem() {
       .then(jsondata => {
         
         console.log(jsondata)
-        setAllAuthors(jsondata)})
+        setAllAuthors(jsondata.authors)})
       .catch(err => console.error(err));
 }
 
   useEffect(() => {
     getAuthors()
-
   },[])
 
   // let poem = mainPoem.map((line, index) => {
@@ -53,7 +52,7 @@ function Poem() {
     <section>
       {select}
     </section>
-    
+
   );
 }
 
