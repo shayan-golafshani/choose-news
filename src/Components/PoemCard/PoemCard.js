@@ -11,3 +11,5 @@ const PoemCard = () => {
         </section>
     )
 }
+
+export default PoemCard;
