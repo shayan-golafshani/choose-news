@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import PoemCard from '../PoemCard/PoemCard';
 import './Poems.css';
 
-
 function Poem() {
   
   const [allAuthors, setAllAuthors] = useState([]);
@@ -18,23 +17,23 @@ function Poem() {
     
     if(localData) {
       localData = JSON.parse(localData)
-      console.log("THIS IS LOCAL DATA inside add2Faves", localData)
+      //console.log("THIS IS LOCAL DATA inside add2Faves", localData)
     }
     
     let matchedPoem = selectedAuthorPoems.filter((poem, index) => index === parseInt(e.target.id))
     
     //matchedPoem = matchedPoem[0]
 
-    console.log("This is the matched poem", matchedPoem);
+    //console.log("This is the matched poem", matchedPoem);
     //let stringifiedPoem = JSON.stringify(matchedPoem[0])
 
     if(localData) {
       //localData = JSON.parse(localData)
-      console.log("LOCAL DATA inside Assignment IF", localData)
+      //console.log("LOCAL DATA inside Assignment IF", localData)
 
       localData.push(matchedPoem[0])
       //stringify it
-      console.log('LOCAL DATA AFTER Pushing matched poem', localData)
+      //console.log('LOCAL DATA AFTER Pushing matched poem', localData)
       localData = JSON.stringify(localData)
       localStorage.setItem('favePoems', localData);
     } else {
