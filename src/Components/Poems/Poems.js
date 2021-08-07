@@ -65,10 +65,7 @@ function Poem() {
   return (
     <section>
       {select}
-      <button> Update Author 
-      </button>
     </section>
-
   );
 }
 
