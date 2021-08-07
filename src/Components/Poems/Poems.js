@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import { Route, Switch, NavLink, Link } from 'react-router-dom';
 
 import './Poems.css';
-
 
 function Poem() {
   
   const [allAuthors, setAllAuthors] = useState([]);
   const [selectedAuthor, setSelectedAuthor] = useState('');
+  const [selectedAuthorPoems , setSelectedAuthorPoems] = useState([]);
   const [allPoems, setAllPoems] = useState([]);
   const [errMessage, setErrMessage] = useState('');
 
@@ -16,41 +15,58 @@ function Poem() {
       .then(response => response.json())
       .then(jsondata => {
         
-        console.log(jsondata)
+        console.log(jsondata, 'inside GET ALL AUTHORS fetch')
         setAllAuthors(jsondata.authors)})
       .catch(err => console.error(err));
-}
+  }
 
+  
+  //getAuthorPoems(setSelectedAuthor)
+  
   useEffect(() => {
     getAuthors()
   },[])
-
-  // let poem = mainPoem.map((line, index) => {
-  //   return  <p key={index}>
-  //             {line}
-  //           </p>
-  // }) 
+  
+  useEffect(() => {
+    if(selectedAuthor){
+      console.log('SELECTED AUTHOR inside useEFFECT', selectedAuthor)
+      const getAuthorPoems = () => {   
+        fetch(`https://poetrydb.org/author/${selectedAuthor}`)
+        .then(response => response.json())
+        .then(jsondata => {
+          
+          console.log(jsondata, "ALL AUTHOR POEMS")
+          setSelectedAuthorPoems(jsondata)})
+        .catch(err => console.error(err));
+    }
+      getAuthorPoems()
+    }
+  }, [selectedAuthor])
 
   
   let options = allAuthors.map( (author, index) => {
-    return <option key={index} value={`${author}`}>{author}</option>
+    return <option key={index} value={author}>{author}</option>
   })
   
   let select = (  
-    <select name="author" id="author">
+    <select 
+      name="author"
+      id="author"
+      onChange={e => {
+        console.log('SELECT DROPDOWN Event target', e.target.value)
+        setSelectedAuthor(e.target.value)
+      }}
+      >
       {options}
     </select>
   )
 
-    /*
-        <PoemCard >
-
-    </PoemCard>
-     */
 
   return (
     <section>
       {select}
+      <button> Update Author 
+      </button>
     </section>
 
   );
