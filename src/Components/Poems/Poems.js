@@ -32,8 +32,8 @@ function Poem() {
   // }) 
 
   
-  let options = allAuthors.map(author => {
-    return <option value={`${author}`}>{author}</option>
+  let options = allAuthors.map( (author, index) => {
+    return <option key={index} value={`${author}`}>{author}</option>
   })
   
   let select = (  
