@@ -15,24 +15,32 @@ function Poem() {
 
   const addToFaves = (e) => {
     let localData = localStorage.getItem('favePoems')
-    //check this logic, could cause bug
+    
     if(localData) {
       localData = JSON.parse(localData)
       console.log("THIS IS LOCAL DATA inside add2Faves", localData)
     }
-    //console.log(e, 'THIS is the id of the card clicked maybe we can match it up with the card')
-    let matchedPoem = selectedAuthorPoems.filter((poem, index) => {
-      //console.log("This is each poem:", poem, '/n This is each poem index:', index)
-      return index === parseInt(e.target.id)
-    })
-    //dig into index
-    matchedPoem = matchedPoem[0]
-
-    console.log("This is the matched poem",matchedPoem);
-    let stringifiedPoem = JSON.stringify(matchedPoem)
-
-    localStorage.setItem('favePoems', stringifiedPoem);
     
+    let matchedPoem = selectedAuthorPoems.filter((poem, index) => index === parseInt(e.target.id))
+    
+    //matchedPoem = matchedPoem[0]
+
+    console.log("This is the matched poem", matchedPoem);
+    //let stringifiedPoem = JSON.stringify(matchedPoem[0])
+
+    if(localData) {
+      //localData = JSON.parse(localData)
+      console.log("LOCAL DATA inside Assignment IF", localData)
+
+      localData.push(matchedPoem[0])
+      //stringify it
+      console.log('LOCAL DATA AFTER Pushing matched poem', localData)
+      localData = JSON.stringify(localData)
+      localStorage.setItem('favePoems', localData);
+    } else {
+      let stringifiedPoem = JSON.stringify(matchedPoem)
+      localStorage.setItem('favePoems', stringifiedPoem);
+    }
   }
 
   const getAuthors = () => {   
