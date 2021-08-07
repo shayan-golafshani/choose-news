@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import PoemCard from '../PoemCard/PoemCard';
 //use same css as before
-import './Poems.css';
+import '../Poems/Poems.css';
 
 function FavoritePoems() {
   
