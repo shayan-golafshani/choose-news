@@ -14,6 +14,9 @@ let spacedLines = lines.map((line, index) => {
         <section
         key={index}
         className='poem-card'>
+               <button className="favorite-btn">
+               <img src="https://img.icons8.com/office/30/000000/like--v1.png"/>
+               </button>
             <h3>{title}</h3>
             <p>By {author}</p>
             <section className='formatted-lines'>{spacedLines}</section>
