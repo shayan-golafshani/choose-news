@@ -6,13 +6,16 @@ const PoemCard = ({title, author, lines, linecount, index}) => {
 //figure out how to make it display a different image everytime!
 <img src='http://thisartworkdoesnotexist.com' alt='random AI generated artwork from thisartworkdoesnotexist.com'/>
 
+let spacedLines = lines.map((line, index) => {
+    return <p key={index}>{line}</p>
+})
     return (
         <section
         key={index}
         className='poem-card'>
             <h3>{title}</h3>
             <p>By {author}</p>
-            <p>{lines}</p>
+            <section className='formatted-lines'>{spacedLines}</section>
             <p>{linecount} lines</p>
         </section>
     )
