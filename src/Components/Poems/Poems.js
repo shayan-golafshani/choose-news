@@ -32,16 +32,17 @@ function Poem() {
   //           </p>
   // }) 
 
-  let dropdown = (
-    
-    <select name="author" id="authors">
-    <option value="volvo">Volvo</option>
-    <option value="saab">Saab</option>
-    <option value="mercedes">Mercedes</option>
-    <option value="audi">Audi</option>
-  </select>
-
+  
+  let options = allAuthors.map(author => {
+    return <option value={`${author}`}>{author}</option>
+  })
+  
+  let select = (  
+    <select name="author" id="author">
+      {options}
+    </select>
   )
+
 
   return (
     
