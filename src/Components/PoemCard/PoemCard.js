@@ -12,7 +12,7 @@ const PoemCard = ({title, author, lines, linecount, index}) => {
             <h3>{title}</h3>
             <p>By {author}</p>
             <p>{lines}</p>
-            <p>{linecount}</p>
+            <p>{linecount} lines</p>
         </section>
     )
 }
