@@ -45,21 +45,15 @@ function Poem() {
 
   
   let options = allAuthors.map((author, index) => <option key={index} value={author}>{author}</option>)
-  
-  let select = (  
-    <select 
-      name="author"
-      id="author"
-      onChange={e => setSelectedAuthor(e.target.value)}
-      >
-      {options}
-    </select>
-  )
-
 
   return (
     <section>
-      {select}
+      <select 
+        name="author"
+        id="author"
+        onChange={e => setSelectedAuthor(e.target.value)}>
+        {options}
+      </select>
     </section>
   );
 }
