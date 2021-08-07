@@ -3,6 +3,7 @@ import { Route, Switch, NavLink, Link } from 'react-router-dom';
 
 import ReactPlayer from "react-player"
 import { tracks } from '../../data/tracks'
+import Poems from '../Poems/Poems';
 import './App.css';
 
 
@@ -79,6 +80,7 @@ function App() {
         </Route>
 
         <Route exact path ='/poems'>
+          <Poems />
         </Route>
       </Switch>
       </main>
