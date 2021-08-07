@@ -40,26 +40,30 @@ function App() {
         </p>
       <section className='Nav-links'>
 
-      <NavLink to='/poems'>
-        <button>
-          Poems
-        </button>
-      </NavLink>
-
-
       <NavLink to='/'>
         <button>
-          Randomize Me
+          Feeling lucky!
         </button>
       </NavLink>
 
+      <NavLink to='/poems'>
+        <button>
+          Search poems
+        </button>
+      </NavLink>
+
+      <NavLink to='/songs'>
         <button>
           Songs
         </button>
+      </NavLink>
 
+      <NavLink to='/zen-zone'>
         <button>
-          Meditation
+          Meditation + Affirmations
         </button>
+      </NavLink>
+
       </section>
 
       </header>
