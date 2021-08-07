@@ -87,6 +87,11 @@ function App() {
         <Route exact path ='/poems'>
           <Poems />
         </Route>
+
+        <Route exact path ='/favorited-poems'>
+          <Poems />
+        </Route>
+
       </Switch>
       </main>
     </div>
