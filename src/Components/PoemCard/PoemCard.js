@@ -1,7 +1,7 @@
 import React from 'react';
 import './PoemCard.css';
 
-const PoemCard = ({title, author, lines, linecount, index}) => {
+const PoemCard = ({title, author, lines, linecount, index, addToFaves}) => {
 //pull out the data going to be passed down through state
 
 //figure out how to make it display a different image everytime!
@@ -14,8 +14,10 @@ let spacedLines = lines.map((line, index) => {
         <section
         key={index}
         className='poem-card'>
-               <button className="favorite-btn">
-                    <img src="https://img.icons8.com/office/30/000000/like--v1.png"/>
+               <button 
+               onClick={e => addToFaves(e)}
+               className="favorite-btn">
+                    <img id={index} src="https://img.icons8.com/office/30/000000/like--v1.png"/>
                </button>
             <h3>{title}</h3>
             <p>By {author}</p>
