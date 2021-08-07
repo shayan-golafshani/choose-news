@@ -14,15 +14,24 @@ function Poem() {
 
 
   const addToFaves = (e) => {
-    console.log(e, 'THIS is the id of the card clicked maybe we can match it up with the card')
+    let localData = localStorage.getItem('favePoems')
+    //check this logic, could cause bug
+    if(localData) {
+      localData = JSON.parse(localData)
+      console.log("THIS IS LOCAL DATA inside add2Faves", localData)
+    }
+    //console.log(e, 'THIS is the id of the card clicked maybe we can match it up with the card')
     let matchedPoem = selectedAuthorPoems.filter((poem, index) => {
-
-      console.log("This is each poem:", poem, '/n This is each poem index:', index)
-
+      //console.log("This is each poem:", poem, '/n This is each poem index:', index)
       return index === parseInt(e.target.id)
     })
-    console.log("This is the matched poem",matchedPoem);
+    //dig into index
+    matchedPoem = matchedPoem[0]
 
+    console.log("This is the matched poem",matchedPoem);
+    let stringifiedPoem = JSON.stringify(matchedPoem)
+
+    localStorage.setItem('favePoems', stringifiedPoem);
     
   }
 
