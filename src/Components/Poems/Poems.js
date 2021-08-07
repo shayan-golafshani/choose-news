@@ -50,10 +50,7 @@ function Poem() {
     <select 
       name="author"
       id="author"
-      onChange={e => {
-        console.log('SELECT DROPDOWN Event target', e.target.value)
-        setSelectedAuthor(e.target.value)
-      }}
+      onChange={e => setSelectedAuthor(e.target.value)}
       >
       {options}
     </select>
