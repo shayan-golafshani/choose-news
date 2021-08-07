@@ -59,15 +59,17 @@ function Poem() {
   })
 
   return (
-    <section className='poetry'>
+    <>
       <select 
         name="author"
         id="author"
         onChange={e => setSelectedAuthor(e.target.value)}>
         {options}
       </select>
+    <section className='poetry-container'>
       {!!poetryCards.length && poetryCards}
     </section>
+    </>
   );
 }
 
