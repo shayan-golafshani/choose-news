@@ -26,11 +26,11 @@ function Poem() {
 
   },[])
 
-  let poem = mainPoem.map((line, index) => {
-    return  <p key={index}>
-              {line}
-            </p>
-  }) 
+  // let poem = mainPoem.map((line, index) => {
+  //   return  <p key={index}>
+  //             {line}
+  //           </p>
+  // }) 
 
   let dropdown = (
     
