@@ -1,4 +1,5 @@
 import React from 'react';
+import './PoemCard.css';
 
 const PoemCard = ({title, author, lines, linecount, index}) => {
 //pull out the data going to be passed down through state
