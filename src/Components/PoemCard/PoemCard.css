@@ -6,3 +6,13 @@
     height: 15rem;
     overflow-y: auto;
   }
+
+  .favorite-btn {
+    background: white;
+    border: none;
+  }
+
+  .favorite-btn:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
