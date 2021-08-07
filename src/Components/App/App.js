@@ -6,6 +6,7 @@ import { tracks } from '../../data/tracks'
 import Poems from '../Poems/Poems';
 import './App.css';
 import { getRandomFromArray } from '../../util';
+import FavoritePoems from '../FavoritePoems/FavoritePoems';
 
 
 function App() {
@@ -89,7 +90,7 @@ function App() {
         </Route>
 
         <Route exact path ='/favorited-poems'>
-          <Poems />
+          <FavoritePoems />
         </Route>
 
       </Switch>
