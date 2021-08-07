@@ -5,6 +5,7 @@ import ReactPlayer from "react-player"
 import { tracks } from '../../data/tracks'
 import Poems from '../Poems/Poems';
 import './App.css';
+import { getRandomFromArray } from '../../util';
 
 
 function App() {
@@ -78,7 +79,7 @@ function App() {
           </section >
           <section className='audio-player'>
             <ReactPlayer
-              url={tracks[0]}
+              url={getRandomFromArray(tracks)}
             />
           </section>
         </Route>
