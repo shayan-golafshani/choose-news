@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
-
 import './Poems.css';
+
+import PoemCard from '../PoemCard/PoemCard';
 
 function Poem() {
   
