@@ -16,7 +16,7 @@ function App() {
       .then(response => response.json())
       .then(jsondata => {
         
-        console.log(jsondata)
+        console.log(jsondata, 'INSIDE THE GET POEM FETCH')
         setMainPoem(jsondata[0].lines)})
       .catch(err => console.error(err));
 }
