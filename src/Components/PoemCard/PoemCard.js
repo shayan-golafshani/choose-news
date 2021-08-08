@@ -1,7 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './PoemCard.css';
 
-const PoemCard = ({title, author, lines, linecount, index, addToFaves, buttonType}) => {
+const PoemCard = ({title, author, lines, linecount, index, addToFaves, buttonType, removeFromFaves}) => {
+
+const [isDisabled, setIsDisabled] = useState(false);
+
+
 //pull out the data going to be passed down through state
 
 //figure out how to make it display a different image everytime!
@@ -20,8 +24,17 @@ let spacedLines = lines.map((line, index) => {
         key={index}
         className='poem-card'>
                <button 
-               onClick={e => addToFaves(e)}
-               className="favorite-btn">
+                    className={isDisabled ? "disabled-favorite"  : "favorite-btn"}
+                    disabled={isDisabled}
+                    onClick={e => {
+                        if(buttonType) {
+                            addToFaves(e)
+                            setIsDisabled(true);
+                        } else {
+                            removeFromFaves(e)
+                        }
+                        }}
+               >
                     {buttonImg}
                </button>
             <h3>{title}</h3>
