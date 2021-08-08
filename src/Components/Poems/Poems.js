@@ -78,13 +78,13 @@ function Poem() {
 
     return <PoemCard
             addToFaves={addToFaves}
+            author={poem.author}
             buttonType={true}
             index={index}
-            title={poem.title}
-            author={poem.author}
-            lines={poem.lines}
-            linecount={poem.linecount}
             key={index}
+            linecount={poem.linecount}
+            lines={poem.lines}
+            title={poem.title}
            />
   })
 
