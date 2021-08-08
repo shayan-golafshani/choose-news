@@ -16,3 +16,13 @@
     cursor: pointer;
     transform: scale(1.1);
   }
+
+  .disabled-favorite {
+    background: red;  
+    /* border: 1px solid grey; */
+    cursor: not-allowed;
+  }
+
+  .disabled-favorite:hover {
+    background: grey;
+  }
