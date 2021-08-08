@@ -11,10 +11,7 @@ function FavoritePoems() {
   const removeFromFaves = (e) => {
     let localData = JSON.parse(localStorage.getItem('favePoems'))
     
-    //console.log("This is the event", e)
     let remainingPoems = localData.filter((poem, index) => parseInt(e.target.id) !== index)
-
-    console.log('THESE ARE THE REMAINING POEMS MATE', remainingPoems)
     setFavoritePoems(remainingPoems)
     localStorage.setItem('favePoems', JSON.stringify(remainingPoems));
   }
