@@ -55,7 +55,7 @@ function Poem() {
         .then(response => response.json())
         .then(jsondata => {
           
-          //console.log(jsondata, "ALL AUTHOR POEMS")
+          console.log(jsondata, "ALL AUTHOR POEMS")
           setSelectedAuthorPoems(jsondata)})
         .catch(err => console.error(err));
     }
@@ -80,10 +80,12 @@ function Poem() {
 
   return (
     <>
+      <label htmlFor="author-select">Choose a poet:</label>
       <select 
         name="author"
-        id="author"
+        id="author-select"
         onChange={e => setSelectedAuthor(e.target.value)}>
+        <option value=""> Please select another option </option>
         {options}
       </select>
       <section className='poetry-container'>
