@@ -78,6 +78,7 @@ function Poem() {
 
     return <PoemCard
             addToFaves={addToFaves}
+            buttonType={true}
             index={index}
             title={poem.title}
             author={poem.author}
