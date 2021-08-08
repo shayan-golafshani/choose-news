@@ -4,9 +4,7 @@ import PoemCard from '../PoemCard/PoemCard';
 import '../Poems/Poems.css';
 
 function FavoritePoems() {
-  
   const [favoritePoems, setFavoritePoems] = useState(JSON.parse(localStorage.getItem('favePoems')) || []);
-  const [errMessage, setErrMessage] = useState('');
 
   const removeFromFaves = (e) => {
     let localData = JSON.parse(localStorage.getItem('favePoems'))
@@ -32,6 +30,7 @@ function FavoritePoems() {
 
   return (
     <>
+      {!poetryCards.length && (<h2>You haven't favorited any cards yet! Go ❤️ some!</h2>)}
     <section className='poetry-container'>
       {!!poetryCards.length && poetryCards}
     </section>
