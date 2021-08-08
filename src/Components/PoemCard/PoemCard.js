@@ -4,6 +4,7 @@ import './PoemCard.css';
 const PoemCard = ({title, author, lines, linecount, index, addToFaves, buttonType, removeFromFaves}) => {
 
 const [isDisabled, setIsDisabled] = useState(false);
+const [canFavorite, setCanFavorite] = useState(true);
 
 
 //pull out the data going to be passed down through state
@@ -21,14 +22,14 @@ let spacedLines = lines.map((line, index) => {
 })
     return (
         <section
-        key={index}
-        className='poem-card'>
+            key={index}
+            className='poem-card'>
                <button 
                     className={isDisabled ? "disabled-favorite"  : "favorite-btn"}
                     disabled={isDisabled}
                     onClick={e => {
                         if(buttonType) {
-                            addToFaves(e)
+                            setCanFavorite(addToFaves(e))
                             setIsDisabled(true);
                         } else {
                             removeFromFaves(e)
@@ -37,6 +38,7 @@ let spacedLines = lines.map((line, index) => {
                >
                     {buttonImg}
                </button>
+            {!canFavorite && <h4>You've already liked this one!</h4>}
             <h3>{title}</h3>
             <p>By {author}</p>
             <section className='formatted-lines'>{spacedLines}</section>
