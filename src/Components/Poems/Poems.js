@@ -29,16 +29,26 @@ function Poem() {
 
     if(localData) {
       //localData = JSON.parse(localData)
-      //console.log("LOCAL DATA inside Assignment IF", localData)
+      console.log("LOCAL DATA inside Assignment IF", localData)
 
-      localData.push(matchedPoem[0])
-      //stringify it
-      //console.log('LOCAL DATA AFTER Pushing matched poem', localData)
-      localData = JSON.stringify(localData)
-      localStorage.setItem('favePoems', localData);
+      let found = localData.find(poem => poem.title === matchedPoem[0].title)
+
+      console.log("This is the value of found", found)
+
+      if(!found) {
+        localData.push(matchedPoem[0])
+        //stringify it
+        //console.log('LOCAL DATA AFTER Pushing matched poem', localData)
+        localData = JSON.stringify(localData)
+        localStorage.setItem('favePoems', localData);
+        return true;
+      }
+      //so if this method returns false then I say it was already favorited!
+      return false;
     } else {
       let stringifiedPoem = JSON.stringify(matchedPoem)
       localStorage.setItem('favePoems', stringifiedPoem);
+      return true;
     }
   }
 
