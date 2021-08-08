@@ -11,12 +11,13 @@ function FavoritePoems() {
 
   let poetryCards = favoritePoems.map((poem, index) => {
     return <PoemCard
-            index={index}
-            title={poem.title}
             author={poem.author}
-            lines={poem.lines}
-            linecount={poem.linecount}
+            buttonType={false}
+            index={index}
             key={index}
+            linecount={poem.linecount}
+            lines={poem.lines}
+            title={poem.title}
            />
   })
 
