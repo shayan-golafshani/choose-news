@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import PoemCard from '../PoemCard/PoemCard';
 //use same css as before
 import '../Poems/Poems.css';
@@ -30,7 +30,7 @@ function FavoritePoems() {
 
   return (
     <>
-      {!poetryCards.length && (<h2>You haven't favorited any cards yet! Go ❤️ some!</h2>)}
+    {!poetryCards.length && (<h2>You haven't favorited any cards yet! Go ❤️ some!</h2>)}
     <section className='poetry-container'>
       {!!poetryCards.length && poetryCards}
     </section>
