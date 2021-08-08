@@ -14,26 +14,21 @@ function Poem() {
   const addToFaves = (e) => {
     let localData = localStorage.getItem('favePoems')
     
+    let matchedPoem = selectedAuthorPoems.filter((poem, index) => index === parseInt(e.target.id))
+    
     if(localData) {
       localData = JSON.parse(localData)
-    }
-    let matchedPoem = selectedAuthorPoems.filter((poem, index) => index === parseInt(e.target.id))
-
-    if(localData) {
       let found = localData.find(poem => poem.title === matchedPoem[0].title)
 
       if(!found) {
-        localData.push(matchedPoem[0])
-        
-        localData = JSON.stringify(localData)
-        localStorage.setItem('favePoems', localData);
+        localData.push(matchedPoem[0])  
+        localStorage.setItem('favePoems', JSON.stringify(localData));
         return true;
       }
-      //so if this method returns false then I say it was already favorited!
+      //so if this method returns false then, it was already favorited!
       return false;
     } else {
-      let stringifiedPoem = JSON.stringify(matchedPoem)
-      localStorage.setItem('favePoems', stringifiedPoem);
+      localStorage.setItem('favePoems', JSON.stringify(matchedPoem));
       return true;
     }
   }
@@ -97,5 +92,4 @@ function Poem() {
     </>
   );
 }
-
 export default Poem;
