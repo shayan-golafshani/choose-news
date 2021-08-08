@@ -54,6 +54,12 @@ function App() {
         </button>
       </NavLink>
 
+      <NavLink to='/favorited-poems'>
+        <button>
+          Fave poems
+        </button>
+      </NavLink>
+
       <NavLink to='/songs'>
         <button>
           Songs
