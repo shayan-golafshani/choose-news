@@ -5,6 +5,8 @@ import ReactPlayer from "react-player"
 import { tracks } from '../../data/tracks'
 import Poems from '../Poems/Poems';
 import './App.css';
+import { getRandomFromArray } from '../../util';
+import FavoritePoems from '../FavoritePoems/FavoritePoems';
 
 
 function App() {
@@ -40,26 +42,36 @@ function App() {
         </p>
       <section className='Nav-links'>
 
-      <NavLink to='/poems'>
-        <button>
-          Poems
-        </button>
-      </NavLink>
-
-
       <NavLink to='/'>
         <button>
-          Randomize Me
+          Feeling lucky!
         </button>
       </NavLink>
 
+      <NavLink to='/poems'>
+        <button>
+          Search poems
+        </button>
+      </NavLink>
+
+      <NavLink to='/favorited-poems'>
+        <button>
+          Fave poems
+        </button>
+      </NavLink>
+
+      <NavLink to='/songs'>
         <button>
           Songs
         </button>
+      </NavLink>
 
+      <NavLink to='/zen-zone'>
         <button>
-          Meditation
+          Meditation + Affirmations
         </button>
+      </NavLink>
+
       </section>
 
       </header>
@@ -74,7 +86,7 @@ function App() {
           </section >
           <section className='audio-player'>
             <ReactPlayer
-              url={tracks[0]}
+              url={getRandomFromArray(tracks)}
             />
           </section>
         </Route>
@@ -82,6 +94,11 @@ function App() {
         <Route exact path ='/poems'>
           <Poems />
         </Route>
+
+        <Route exact path ='/favorited-poems'>
+          <FavoritePoems />
+        </Route>
+
       </Switch>
       </main>
     </div>
