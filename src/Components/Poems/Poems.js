@@ -8,37 +8,28 @@ function Poem() {
   const [selectedAuthor, setSelectedAuthor] = useState('');
   const [selectedAuthorPoems , setSelectedAuthorPoems] = useState([]);
   // not using this state yet.
-  //const [allPoems, setAllPoems] = useState([]);
   const [errMessage, setErrMessage] = useState('');
 
 
   const addToFaves = (e) => {
     let localData = localStorage.getItem('favePoems')
     
-    if(localData) {
-      localData = JSON.parse(localData)
-      //console.log("THIS IS LOCAL DATA inside add2Faves", localData)
-    }
-    
     let matchedPoem = selectedAuthorPoems.filter((poem, index) => index === parseInt(e.target.id))
     
-    //matchedPoem = matchedPoem[0]
-
-    //console.log("This is the matched poem", matchedPoem);
-    //let stringifiedPoem = JSON.stringify(matchedPoem[0])
-
     if(localData) {
-      //localData = JSON.parse(localData)
-      //console.log("LOCAL DATA inside Assignment IF", localData)
+      localData = JSON.parse(localData)
+      let found = localData.find(poem => poem.title === matchedPoem[0].title)
 
-      localData.push(matchedPoem[0])
-      //stringify it
-      //console.log('LOCAL DATA AFTER Pushing matched poem', localData)
-      localData = JSON.stringify(localData)
-      localStorage.setItem('favePoems', localData);
+      if(!found) {
+        localData.push(matchedPoem[0])  
+        localStorage.setItem('favePoems', JSON.stringify(localData));
+        return true;
+      }
+      //so if this method returns false then, it was already favorited!
+      return false;
     } else {
-      let stringifiedPoem = JSON.stringify(matchedPoem)
-      localStorage.setItem('favePoems', stringifiedPoem);
+      localStorage.setItem('favePoems', JSON.stringify(matchedPoem));
+      return true;
     }
   }
 
@@ -47,7 +38,7 @@ function Poem() {
       .then(response => response.json())
       .then(jsondata => {
         
-        console.log(jsondata, 'inside GET ALL AUTHORS fetch')
+        //console.log(jsondata, 'inside GET ALL AUTHORS fetch')
         setAllAuthors(jsondata.authors)})
       .catch(err => console.error(err));
   }
@@ -58,7 +49,7 @@ function Poem() {
   
   useEffect(() => {
     if(selectedAuthor){
-      console.log('SELECTED AUTHOR inside useEFFECT', selectedAuthor)
+      //console.log('SELECTED AUTHOR inside useEFFECT', selectedAuthor)
       const getAuthorPoems = () => {   
         fetch(`https://poetrydb.org/author/${selectedAuthor}`)
         .then(response => response.json())
@@ -72,10 +63,9 @@ function Poem() {
     }
   }, [selectedAuthor])
 
-  
   let options = allAuthors.map((author, index) => <option key={index} value={author}>{author}</option>)
-  let poetryCards = selectedAuthorPoems.map((poem, index) => {
 
+  let poetryCards = selectedAuthorPoems.map((poem, index) => {
     return <PoemCard
             addToFaves={addToFaves}
             author={poem.author}
@@ -90,17 +80,18 @@ function Poem() {
 
   return (
     <>
+      <label htmlFor="author-select">Choose a poet:</label>
       <select 
         name="author"
-        id="author"
+        id="author-select"
         onChange={e => setSelectedAuthor(e.target.value)}>
+        <option value=""> Please select another option </option>
         {options}
       </select>
-    <section className='poetry-container'>
-      {!!poetryCards.length && poetryCards}
-    </section>
+      <section className='poetry-container'>
+        {!!poetryCards.length && poetryCards}
+      </section>
     </>
   );
 }
-
 export default Poem;
