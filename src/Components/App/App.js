@@ -39,9 +39,11 @@ function App() {
     
     <div className="App">
       <header className="App-header">
+      <NavLink to='/'>
         <p>
           Tha-Zen Box!
         </p>
+      </NavLink>
       <section className='Nav-links'>
 
       <NavLink to='/'>
