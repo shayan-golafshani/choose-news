@@ -31,6 +31,17 @@
   justify-content: space-around;
 }
 
+.app-title {
+  text-decoration: none;
+}
+
+a { text-decoration: none; color:white; }
+a:visited { text-decoration: none; color:white; }
+a:hover { text-decoration: none; color:white; }
+a:focus { text-decoration: none; color:white; }
+a:hover, a:active { text-decoration: none; color:white }
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -38,8 +49,4 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-.spinning-photo {
-  
 }
