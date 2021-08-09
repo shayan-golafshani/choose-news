@@ -7,6 +7,7 @@ import Poems from '../Poems/Poems';
 import './App.css';
 import { getRandomFromArray } from '../../util';
 import FavoritePoems from '../FavoritePoems/FavoritePoems';
+import Loading from '../Loading/Loading';
 
 
 function App() {
@@ -98,6 +99,10 @@ function App() {
         <Route exact path ='/favorited-poems'>
           <FavoritePoems />
         </Route>
+
+        {/* <Route exact path ='/loading'>
+          <Loading />
+        </Route> */}
 
       </Switch>
       </main>
