@@ -1,25 +1,18 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('like_two_poems', () => {
+    cy.intercept('GET', 'https://poetrydb.org/author', {
+        statusCode: 200,
+        fixture: 'authors.json'
+        });
+
+        cy.intercept('GET', 'https://poetrydb.org/author/Algernon%20Charles%20Swinburne', {
+            statusCode: 200,
+            fixture: 'poem.json'
+            });
+
+        cy.visit('http://localhost:3000/poems')
+
+        cy.get('select').select('Algernon Charles Swinburne')
+        cy.get('.favorite-btn').click({ multiple: true })
+
+        cy.get('[href="/favorited-poems"] > button').should('contain', 'Fave poems').click()
+})

@@ -50,6 +50,9 @@ function Poem() {
       .then(jsondata => {
         setIsLoading(false)
         console.log('JSON DATA INSIDE GET AUTHORS', jsondata)
+        if(jsondata.status === 404) {
+          throw new Error('Something went wrong, Please try again.')
+        }
         if(jsondata) {
           setAllAuthors(jsondata.authors)
         } else {
@@ -134,9 +137,9 @@ function Poem() {
       <> 
         {renderSelect()}
       <section className='poetry-container'>
-        {isLoading && <Loading />}
         {authErrMessage && <Error message={"We weren't able to load authors for you, mate! Try again."} />}
         {poemListErrMessage && <Error message={"We weren't able to load the poems for you, mate! Try again."} />}
+        {isLoading && <Loading />}
         {/* {(!isLoading && !authErrMessage) && renderSelect()} */}
         {(!isLoading && !poemListErrMessage) && !!selectedAuthorPoems.length && makePoetryCards()}
       </section>

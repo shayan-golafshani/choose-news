@@ -25,7 +25,13 @@ function App() {
       .then(jsondata => {
         setIsLoadingPoem(false)
         //console.log(jsondata, 'INSIDE THE GET POEM FETCH')
-        setMainPoem(jsondata[0].lines)})
+        if(jsondata) {
+        setMainPoem(jsondata[0].lines)
+        }
+        else {
+          throw new Error('Something went wrong, Please try again.')
+        }
+      })
         .catch(err => {
           setErrMessage('Darn, the server is down! Please try again later.')
           console.error(err)
@@ -108,8 +114,8 @@ function App() {
       <Switch>
         <Route exact path='/'>
           <section className='feeling-lucky-page'>
-            {isLoadingPoem && <Loading />}
             {errMessage && <Error message={"We weren't able to grab a random poem for you, mate! Try again."} />}
+            {isLoadingPoem && <Loading />}
             {(!isLoadingPoem && !errMessage) && feelingLuckyPage}
           </section>
         </Route>
