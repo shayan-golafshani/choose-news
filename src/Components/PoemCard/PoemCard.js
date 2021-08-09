@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './PoemCard.css';
 
 const PoemCard = ({title, author, lines, linecount, index, addToFaves, buttonType, removeFromFaves}) => {
@@ -12,6 +12,12 @@ const [canFavorite, setCanFavorite] = useState(true);
 //figure out how to make it display a different image everytime!
 //<img src='http://thisartworkdoesnotexist.com' alt='random AI generated artwork from thisartworkdoesnotexist.com'/>
 
+const handleClick = (e) => {
+        setIsDisabled(true);
+        setCanFavorite(addToFaves(e))
+    }
+
+
 let buttonImg = buttonType ?
                    <img id={index} src="https://img.icons8.com/office/30/000000/like--v1.png" alt="favorite button"/>
                  : <img id={index} src="https://img.icons8.com/office/30/000000/delete-sign.png" alt="delete button"/>;
@@ -20,17 +26,20 @@ let buttonImg = buttonType ?
 let spacedLines = lines.map((line, index) => {
     return <p key={index}>{line}</p>
 })
+
+// useEffect
+
     return (
         <section
             key={index}
             className='poem-card'>
-               <button 
+               <button
+                    id={index} 
                     className={isDisabled ? "disabled-favorite"  : "favorite-btn"}
                     disabled={isDisabled}
                     onClick={e => {
                         if(buttonType) {
-                            setCanFavorite(addToFaves(e))
-                            setIsDisabled(true);
+                            handleClick(e)
                         } else {
                             removeFromFaves(e)
                         }
