@@ -1,0 +1,23 @@
+  
+.loading{
+    width: 100vw;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-message {
+    /* color: white; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 3rem;
+    padding-bottom: 2rem;
+}
+
+.loading-image {
+    width: min-content;
+    /* height: 30vh; */
+}
