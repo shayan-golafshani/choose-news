@@ -101,10 +101,9 @@ function App() {
           <FavoritePoems />
         </Route>
 
-        <Route exact path ='/error'>
+        <Route >
           <Error />
         </Route>
-
       </Switch>
       </main>
     </div>
