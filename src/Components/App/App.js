@@ -20,7 +20,7 @@ function App() {
 
   const getPoem = () => {
     setIsLoadingPoem(true)   
-      fetch('https://poetrydb.org/randomD')
+      fetch('https://poetrydb.org/random')
       .then(response => response.json())
       .then(jsondata => {
         setIsLoadingPoem(false)
