@@ -15,9 +15,10 @@
 .App-header {
   background-color: #282c34;
   color: white;
-  font-size: 4rem;
+  font-size: 3em;
   font-family: Arial, Helvetica, sans-serif;
-  min-height: 20vh;
+  /* min-height: 15vh; */
+  /* max-height: 17vh; */
 }
 
 .audio-player {
@@ -31,9 +32,6 @@
   justify-content: space-around;
 }
 
-.app-title {
-  text-decoration: none;
-}
 
 a { text-decoration: none; color:white; }
 a:visited { text-decoration: none; color:white; }
