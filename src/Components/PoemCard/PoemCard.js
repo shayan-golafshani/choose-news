@@ -58,7 +58,7 @@ PoemCard.propTypes = {
     title: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,
     lines: PropTypes.array.isRequired,
-    linecount: PropTypes.number.isRequired,
+    linecount: PropTypes.string.isRequired,
     index: PropTypes.any.isRequired, 
     addToFaves: PropTypes.func, 
     buttonType: PropTypes.bool.isRequired, 
