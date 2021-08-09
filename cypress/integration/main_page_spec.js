@@ -23,11 +23,16 @@ describe('Feeling lucky page', () => {
     })
 
     it('Should display a poem' , ()=> {
-
+        cy.get('.main-poem')
+        .contains('The Mountain sat upon the Plain')
+        cy.get('.main-poem > :nth-child(2)').contains('In his tremendous Chair ')
     })
 
     it('Should display a React player component' , ()=> {
-
+        cy.wait(2000)
+        cy.get('iframe').click()
+        cy.get('iframe').its('0.contentDocument.body')
+        .should('be.null')
     })
 
 });
