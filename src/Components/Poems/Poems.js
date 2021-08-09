@@ -13,8 +13,16 @@ function Poem() {
 
   const addToFaves = (e) => {
     let localData = localStorage.getItem('favePoems')
-    
-    let matchedPoem = selectedAuthorPoems.filter((poem, index) => index === parseInt(e.target.id))
+  
+    // if there's nothing in local storage you need to rturn just an empty array
+
+    let matchedPoem = selectedAuthorPoems.filter((poem, index) => {
+      console.log(`${poem.author}${index}` === e.target.id, "FOUND A MATCH")
+      return `${poem.author}${index}` === e.target.id
+      //index === e.target.id
+    })
+
+    console.log('match', matchedPoem)
     
     if(localData) {
       localData = JSON.parse(localData)
@@ -37,8 +45,6 @@ function Poem() {
       fetch('https://poetrydb.org/author')
       .then(response => response.json())
       .then(jsondata => {
-        
-        //console.log(jsondata, 'inside GET ALL AUTHORS fetch')
         setAllAuthors(jsondata.authors)})
       .catch(err => console.error(err));
   }
@@ -48,6 +54,7 @@ function Poem() {
   },[])
   
   useEffect(() => {
+    setSelectedAuthorPoems([])
     if(selectedAuthor){
       //console.log('SELECTED AUTHOR inside useEFFECT', selectedAuthor)
       const getAuthorPoems = () => {   
@@ -63,20 +70,25 @@ function Poem() {
     }
   }, [selectedAuthor])
 
+  
   let options = allAuthors.map((author, index) => <option key={index} value={author}>{author}</option>)
+  
 
-  let poetryCards = selectedAuthorPoems.map((poem, index) => {
-    return <PoemCard
-            addToFaves={addToFaves}
-            author={poem.author}
-            buttonType={true}
-            index={index}
-            key={index}
-            linecount={poem.linecount}
-            lines={poem.lines}
-            title={poem.title}
-           />
-  })
+  const makePoetryCards = () => {
+   return selectedAuthorPoems.map((poem, index) => {
+      return <PoemCard
+      addToFaves={addToFaves}
+      author={poem.author}
+      buttonType={true}
+      index={`${poem.author}${index.toString()}`}
+      key={index}
+      linecount={poem.linecount}
+      lines={poem.lines}
+      title={poem.title}
+      />
+    })
+  }
+
 
   return (
     <>
@@ -89,7 +101,7 @@ function Poem() {
         {options}
       </select>
       <section className='poetry-container'>
-        {!!poetryCards.length && poetryCards}
+        {!!selectedAuthorPoems.length && makePoetryCards()}
       </section>
     </>
   );
