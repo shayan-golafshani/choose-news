@@ -19,7 +19,7 @@ describe('Feeling lucky page', () => {
     })
 
     it('Should display a rotating piece of art' , ()=> {
-
+        cy.get('.App-logo').should("have.attr", "src")
     })
 
     it('Should display a poem' , ()=> {
