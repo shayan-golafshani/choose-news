@@ -5,7 +5,7 @@ import ReactPlayer from "react-player"
 import { tracks } from '../../data/tracks'
 import Poems from '../Poems/Poems';
 import './App.css';
-import { getRandomFromArray } from '../../util';
+import { checkForError, getRandomFromArray } from '../../util';
 import FavoritePoems from '../FavoritePoems/FavoritePoems';
 import Loading from '../Loading/Loading';
 import Error from '../Error/Error';
@@ -21,7 +21,7 @@ function App() {
   const getPoem = () => {
     setIsLoadingPoem(true)   
       fetch('https://poetrydb.org/random')
-      .then(response => response.json())
+      .then(response => checkForError(response))
       .then(jsondata => {
         setIsLoadingPoem(false)
         //console.log(jsondata, 'INSIDE THE GET POEM FETCH')
