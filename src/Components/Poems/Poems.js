@@ -17,12 +17,12 @@ function Poem() {
     // if there's nothing in local storage you need to rturn just an empty array
 
     let matchedPoem = selectedAuthorPoems.filter((poem, index) => {
-      console.log(`${poem.author}${index}` === e.target.id, "FOUND A MATCH")
+      // console.log(`${poem.author}${index}` === e.target.id, "FOUND A MATCH")
       return `${poem.author}${index}` === e.target.id
       //index === e.target.id
     })
 
-    console.log('match', matchedPoem)
+    // console.log('match', matchedPoem)
     
     if(localData) {
       localData = JSON.parse(localData)
@@ -46,7 +46,10 @@ function Poem() {
       .then(response => response.json())
       .then(jsondata => {
         setAllAuthors(jsondata.authors)})
-      .catch(err => console.error(err));
+      .catch(err => {
+        setErrMessage('Darn, the server is down! Please try again later.')
+        console.error(err)
+      });
   }
   
   useEffect(() => {
@@ -62,18 +65,19 @@ function Poem() {
         .then(response => response.json())
         .then(jsondata => {
           
-          console.log(jsondata, "ALL AUTHOR POEMS")
+          // console.log(jsondata, "ALL AUTHOR POEMS")
           setSelectedAuthorPoems(jsondata)})
-        .catch(err => console.error(err));
+        .catch(err => {
+        setErrMessage('Darn, the server is down! Please try again later.')
+        console.error(err)
+        });
     }
       getAuthorPoems()
     }
   }, [selectedAuthor])
 
-  
   let options = allAuthors.map((author, index) => <option key={index} value={author}>{author}</option>)
   
-
   const makePoetryCards = () => {
    return selectedAuthorPoems.map((poem, index) => {
       return <PoemCard
