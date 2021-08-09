@@ -43,10 +43,10 @@ describe('Poem selection page spec', () => {
         
         cy.get('select').select('Algernon Charles Swinburne')
         cy.get('.favorite-btn').click({ multiple: true })
-        cy.get(':nth-child(1) > .disabled-favorite').should('have.css', 'background-color')
-        .and('eq', 'rgb(255, 0, 0)')
-        cy.get(':nth-child(2) > .disabled-favorite').should('have.css', 'background-color')
-        .and('eq', 'rgb(255, 0, 0)')
+        cy.get('[href="/favorited-poems"] > button').should('contain', 'Fave poems').click()
+
+        cy.get('.poetry-container > :nth-child(1) > h3').contains("On the Death of Robert Browning")
+        cy.get('.poetry-container > :nth-child(2)').contains('Etude Realiste')
     })
 
 })
