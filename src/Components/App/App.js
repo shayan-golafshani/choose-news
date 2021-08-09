@@ -62,7 +62,7 @@ function App() {
         </button>
       </NavLink>
 
-      <NavLink to='/songs'>
+      {/* <NavLink to='/songs'>
         <button>
           Songs
         </button>
@@ -72,7 +72,7 @@ function App() {
         <button>
           Meditation + Affirmations
         </button>
-      </NavLink>
+      </NavLink> */}
 
       </section>
 
