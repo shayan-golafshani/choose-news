@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import PoemCard from '../PoemCard/PoemCard';
+import Loading from '../Loading/Loading';
 import './Poems.css';
 
 function Poem() {
@@ -7,6 +8,7 @@ function Poem() {
   const [allAuthors, setAllAuthors] = useState([]);
   const [selectedAuthor, setSelectedAuthor] = useState('');
   const [selectedAuthorPoems , setSelectedAuthorPoems] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   // not using this state yet.
   const [errMessage, setErrMessage] = useState('');
 
@@ -41,11 +43,14 @@ function Poem() {
     }
   }
 
-  const getAuthors = () => {   
+  const getAuthors = () => {
+      setIsLoading(true)
       fetch('https://poetrydb.org/author')
       .then(response => response.json())
       .then(jsondata => {
-        setAllAuthors(jsondata.authors)})
+        setIsLoading(false)
+        setAllAuthors(jsondata.authors)
+      })
       .catch(err => {
         setErrMessage('Darn, the server is down! Please try again later.')
         console.error(err)
@@ -60,11 +65,12 @@ function Poem() {
     setSelectedAuthorPoems([])
     if(selectedAuthor){
       //console.log('SELECTED AUTHOR inside useEFFECT', selectedAuthor)
-      const getAuthorPoems = () => {   
+      const getAuthorPoems = () => {
+        setIsLoading(true)   
         fetch(`https://poetrydb.org/author/${selectedAuthor}`)
         .then(response => response.json())
         .then(jsondata => {
-          
+          setIsLoading(false)
           // console.log(jsondata, "ALL AUTHOR POEMS")
           setSelectedAuthorPoems(jsondata)})
         .catch(err => {
@@ -104,6 +110,7 @@ function Poem() {
         <option value=""> Please select another option </option>
         {options}
       </select>
+      {isLoading && <Loading />}
       <section className='poetry-container'>
         {!!selectedAuthorPoems.length && makePoetryCards()}
       </section>
