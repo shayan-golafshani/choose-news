@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import PropTypes, { string } from 'prop-types';
+import PropTypes from 'prop-types';
 import './PoemCard.css';
 
 const PoemCard = ({title, author, lines, linecount, index, addToFaves, buttonType, removeFromFaves}) => {
