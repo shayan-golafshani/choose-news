@@ -1,0 +1,17 @@
+.error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+}
+
+.error-image{
+    width: 30vw;
+    height: auto;
+}
+
+.error-message {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: black;
+}

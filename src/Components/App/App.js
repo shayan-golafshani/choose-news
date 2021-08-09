@@ -5,41 +5,70 @@ import ReactPlayer from "react-player"
 import { tracks } from '../../data/tracks'
 import Poems from '../Poems/Poems';
 import './App.css';
-import { getRandomFromArray } from '../../util';
+import { checkForError, getRandomFromArray } from '../../util';
 import FavoritePoems from '../FavoritePoems/FavoritePoems';
+import Loading from '../Loading/Loading';
+import Error from '../Error/Error';
 
 
 function App() {
   const [mainPoem, setMainPoem] = useState([]);
+  const [isLoadingPoem, setIsLoadingPoem] = useState(false);
   const [errMessage, setErrMessage] = useState('');
 
-  const getPoem = () => {   
+  // let poem;
+
+  const getPoem = () => {
+    setIsLoadingPoem(true)   
       fetch('https://poetrydb.org/random')
-      .then(response => response.json())
+      .then(response => checkForError(response))
       .then(jsondata => {
-        
+        setIsLoadingPoem(false)
         //console.log(jsondata, 'INSIDE THE GET POEM FETCH')
         setMainPoem(jsondata[0].lines)})
-      .catch(err => console.error(err));
+        .catch(err => {
+          setErrMessage('Darn, the server is down! Please try again later.')
+          console.error(err)
+        });
 }
 
   useEffect(() => {
     getPoem()
   },[])
 
+  // if(mainPoem) {
   let poem = mainPoem.map((line, index) => {
     return  <p key={index}>
               {line}
             </p>
   }) 
+  // }
+
+  let feelingLuckyPage = (
+  <>
+  <section className="spinning-photo">
+    {<img src='https://thisartworkdoesnotexist.com/' className="App-logo" alt="logo" />}
+  </section>
+  <section className='main-poem'>
+    {poem}
+  </section >
+  <section className='audio-player'>
+    <ReactPlayer
+      url={getRandomFromArray(tracks)}
+    />
+  </section>
+</>
+  )
 
   return (
     
     <div className="App">
       <header className="App-header">
-        <p>
-          Tha-Zen Box!
+      <NavLink to='/'>
+        <p className='title-text'>
+          Tha-Zen Box! 🌸
         </p>
+      </NavLink>
       <section className='Nav-links'>
 
       <NavLink to='/'>
@@ -60,7 +89,7 @@ function App() {
         </button>
       </NavLink>
 
-      <NavLink to='/songs'>
+      {/* <NavLink to='/songs'>
         <button>
           Songs
         </button>
@@ -70,7 +99,7 @@ function App() {
         <button>
           Meditation + Affirmations
         </button>
-      </NavLink>
+      </NavLink> */}
 
       </section>
 
@@ -78,16 +107,10 @@ function App() {
       <main>
       <Switch>
         <Route exact path='/'>
-          <section className="spinning-photo">
-            {<img src='https://thisartworkdoesnotexist.com/' className="App-logo" alt="logo" />}
-          </section>
-          <section className='main-poem'>
-            {poem}
-          </section >
-          <section className='audio-player'>
-            <ReactPlayer
-              url={getRandomFromArray(tracks)}
-            />
+          <section className='feeling-lucky-page'>
+            {isLoadingPoem && <Loading />}
+            {errMessage && <Error message={"We weren't able to grab a random poem for you, mate! Try again."} />}
+            {(!isLoadingPoem && !errMessage) && feelingLuckyPage}
           </section>
         </Route>
 
@@ -99,6 +122,9 @@ function App() {
           <FavoritePoems />
         </Route>
 
+        <Route >
+          <Error />
+        </Route>
       </Switch>
       </main>
     </div>

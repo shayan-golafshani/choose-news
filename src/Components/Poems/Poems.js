@@ -1,15 +1,17 @@
 import React, {useEffect, useState} from 'react';
+import Error from '../Error/Error';
 import PoemCard from '../PoemCard/PoemCard';
+import Loading from '../Loading/Loading';
 import './Poems.css';
+import { checkForError } from '../../util';
 
 function Poem() {
-  
   const [allAuthors, setAllAuthors] = useState([]);
   const [selectedAuthor, setSelectedAuthor] = useState('');
   const [selectedAuthorPoems , setSelectedAuthorPoems] = useState([]);
-  // not using this state yet.
-  const [errMessage, setErrMessage] = useState('');
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [authErrMessage, setAuthErrMessage] = useState('');
+  const [poemListErrMessage, setPoemListErrMessage] = useState('');
 
   const addToFaves = (e) => {
     let localData = localStorage.getItem('favePoems')
@@ -17,12 +19,12 @@ function Poem() {
     // if there's nothing in local storage you need to rturn just an empty array
 
     let matchedPoem = selectedAuthorPoems.filter((poem, index) => {
-      console.log(`${poem.author}${index}` === e.target.id, "FOUND A MATCH")
+      // console.log(`${poem.author}${index}` === e.target.id, "FOUND A MATCH")
       return `${poem.author}${index}` === e.target.id
       //index === e.target.id
     })
 
-    console.log('match', matchedPoem)
+    // console.log('match', matchedPoem)
     
     if(localData) {
       localData = JSON.parse(localData)
@@ -41,12 +43,23 @@ function Poem() {
     }
   }
 
-  const getAuthors = () => {   
+  const getAuthors = () => {
+      setIsLoading(true)
       fetch('https://poetrydb.org/author')
-      .then(response => response.json())
+      .then(response => checkForError(response))
       .then(jsondata => {
-        setAllAuthors(jsondata.authors)})
-      .catch(err => console.error(err));
+        setIsLoading(false)
+        console.log('JSON DATA INSIDE GET AUTHORS', jsondata)
+        if(jsondata) {
+          setAllAuthors(jsondata.authors)
+        } else {
+          throw new Error('Something went wrong, Please try again.')
+        }
+      })
+      .catch(err => {
+        setAuthErrMessage('Darn, the server is down! Please try again later.')
+        console.error(err)
+      });
   }
   
   useEffect(() => {
@@ -57,23 +70,37 @@ function Poem() {
     setSelectedAuthorPoems([])
     if(selectedAuthor){
       //console.log('SELECTED AUTHOR inside useEFFECT', selectedAuthor)
-      const getAuthorPoems = () => {   
+      const getAuthorPoems = () => {
+        setIsLoading(true)   
         fetch(`https://poetrydb.org/author/${selectedAuthor}`)
-        .then(response => response.json())
+        .then(response => checkForError(response))
         .then(jsondata => {
-          
-          console.log(jsondata, "ALL AUTHOR POEMS")
-          setSelectedAuthorPoems(jsondata)})
-        .catch(err => console.error(err));
+          setIsLoading(false)
+          if(jsondata.status === 404) {
+            throw new Error('Something went wrong, Please try again.')
+          }
+          console.log('JSON DATA INSIDE GET AUTHOR POEMS', jsondata)
+            if(jsondata) {
+              setSelectedAuthorPoems(jsondata)
+            } else {
+              throw new Error('Something went wrong, Please try again.')
+            }
+        })
+        .catch(err => {
+          setPoemListErrMessage('Darn, the server is down! Please try again later.')
+          console.error(err)
+        });
     }
       getAuthorPoems()
     }
   }, [selectedAuthor])
 
+  let options
+  if(!!allAuthors.length) {
+    //console.log('THE LENGTH OF ALL AUTHORS', allAuthors.length)
+    options = allAuthors.map((author, index) => <option key={index} value={author}>{author}</option>)
+  }
   
-  let options = allAuthors.map((author, index) => <option key={index} value={author}>{author}</option>)
-  
-
   const makePoetryCards = () => {
    return selectedAuthorPoems.map((poem, index) => {
       return <PoemCard
@@ -89,9 +116,8 @@ function Poem() {
     })
   }
 
-
-  return (
-    <>
+  const renderSelect= () => {
+    return <>
       <label htmlFor="author-select">Choose a poet:</label>
       <select 
         name="author"
@@ -100,10 +126,22 @@ function Poem() {
         <option value=""> Please select another option </option>
         {options}
       </select>
-      <section className='poetry-container'>
-        {!!selectedAuthorPoems.length && makePoetryCards()}
-      </section>
     </>
+  }
+
+  return (
+
+      <> 
+        {renderSelect()}
+      <section className='poetry-container'>
+        {isLoading && <Loading />}
+        {authErrMessage && <Error message={"We weren't able to load authors for you, mate! Try again."} />}
+        {poemListErrMessage && <Error message={"We weren't able to load the poems for you, mate! Try again."} />}
+        {/* {(!isLoading && !authErrMessage) && renderSelect()} */}
+        {(!isLoading && !poemListErrMessage) && !!selectedAuthorPoems.length && makePoetryCards()}
+      </section>
+      </>
   );
 }
 export default Poem;
+// !!selectedAuthorPoems.length
