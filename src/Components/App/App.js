@@ -13,13 +13,17 @@ import Error from '../Error/Error';
 
 function App() {
   const [mainPoem, setMainPoem] = useState([]);
+  const [isLoadingPoem, setIsLoadingPoem] = useState(false);
   const [errMessage, setErrMessage] = useState('');
 
-  const getPoem = () => {   
-      fetch('https://poetrydb.org/random')
+  // let poem;
+
+  const getPoem = () => {
+    setIsLoadingPoem(true)   
+      fetch('https://poetrydb.org/randomD')
       .then(response => response.json())
       .then(jsondata => {
-        
+        setIsLoadingPoem(false)
         //console.log(jsondata, 'INSIDE THE GET POEM FETCH')
         setMainPoem(jsondata[0].lines)})
         .catch(err => {
@@ -32,19 +36,37 @@ function App() {
     getPoem()
   },[])
 
+  // if(mainPoem) {
   let poem = mainPoem.map((line, index) => {
     return  <p key={index}>
               {line}
             </p>
   }) 
+  // }
+
+  let feelingLuckyPage = (
+  <>
+  <section className="spinning-photo">
+    {<img src='https://thisartworkdoesnotexist.com/' className="App-logo" alt="logo" />}
+  </section>
+  <section className='main-poem'>
+    {poem}
+  </section >
+  <section className='audio-player'>
+    <ReactPlayer
+      url={getRandomFromArray(tracks)}
+    />
+  </section>
+</>
+  )
 
   return (
     
     <div className="App">
       <header className="App-header">
       <NavLink to='/'>
-        <p>
-          Tha-Zen Box!
+        <p className='title-text'>
+          Tha-Zen Box! 🌸
         </p>
       </NavLink>
       <section className='Nav-links'>
@@ -85,16 +107,10 @@ function App() {
       <main>
       <Switch>
         <Route exact path='/'>
-          <section className="spinning-photo">
-            {<img src='https://thisartworkdoesnotexist.com/' className="App-logo" alt="logo" />}
-          </section>
-          <section className='main-poem'>
-            {poem}
-          </section >
-          <section className='audio-player'>
-            <ReactPlayer
-              url={getRandomFromArray(tracks)}
-            />
+          <section className='feeling-lucky-page'>
+            {isLoadingPoem && <Loading />}
+            {errMessage && <Error message={"We weren't able to grab a random poem for you, mate! Try again."} />}
+            {(!isLoadingPoem && !errMessage) && feelingLuckyPage}
           </section>
         </Route>
 
