@@ -6,12 +6,11 @@
 }
 
 .error-image{
-    width: 50vw;
+    width: 30vw;
     height: auto;
 }
 
 .error-message {
-    /* color: white; */
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     margin-bottom: 2rem;;
 }
