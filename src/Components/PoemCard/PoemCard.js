@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
+import PropTypes, { string } from 'prop-types';
 import './PoemCard.css';
 
 const PoemCard = ({title, author, lines, linecount, index, addToFaves, buttonType, removeFromFaves}) => {
@@ -6,16 +7,8 @@ const PoemCard = ({title, author, lines, linecount, index, addToFaves, buttonTyp
 const [isDisabled, setIsDisabled] = useState(false);
 const [canFavorite, setCanFavorite] = useState(true);
 
-
-//pull out the data going to be passed down through state
-
 //figure out how to make it display a different image everytime!
 //<img src='http://thisartworkdoesnotexist.com' alt='random AI generated artwork from thisartworkdoesnotexist.com'/>
-
-const handleClick = (e) => {
-        setIsDisabled(true);
-        setCanFavorite(addToFaves(e))
-    }
 
 
 let buttonImg = buttonType ?
@@ -23,11 +16,14 @@ let buttonImg = buttonType ?
                  : <img id={index} src="https://img.icons8.com/office/30/000000/delete-sign.png" alt="delete button"/>;
 
 
+const handleClick = (e) => {
+        setIsDisabled(true);
+        setCanFavorite(addToFaves(e))
+    }
+
 let spacedLines = lines.map((line, index) => {
     return <p key={index}>{line}</p>
 })
-
-// useEffect
 
     return (
         <section
@@ -57,3 +53,14 @@ let spacedLines = lines.map((line, index) => {
 }
 
 export default PoemCard;
+
+PoemCard.propTypes = {
+    title: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    lines: PropTypes.array.isRequired,
+    linecount: PropTypes.number.isRequired,
+    index: PropTypes.any.isRequired, 
+    addToFaves: PropTypes.func, 
+    buttonType: PropTypes.bool.isRequired, 
+    removeFromFaves: PropTypes.func
+};
