@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from 'react';
+import Error from '../Error/Error';
 import PoemCard from '../PoemCard/PoemCard';
 import Loading from '../Loading/Loading';
 import './Poems.css';
+import { checkForError } from '../../util';
 
 function Poem() {
-  
   const [allAuthors, setAllAuthors] = useState([]);
   const [selectedAuthor, setSelectedAuthor] = useState('');
   const [selectedAuthorPoems , setSelectedAuthorPoems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  // not using this state yet.
-  const [errMessage, setErrMessage] = useState('');
-
+  const [authErrMessage, setAuthErrMessage] = useState('');
+  const [poemListErrMessage, setPoemListErrMessage] = useState('');
 
   const addToFaves = (e) => {
     let localData = localStorage.getItem('favePoems')
@@ -46,13 +46,18 @@ function Poem() {
   const getAuthors = () => {
       setIsLoading(true)
       fetch('https://poetrydb.org/author')
-      .then(response => response.json())
+      .then(response => checkForError(response))
       .then(jsondata => {
         setIsLoading(false)
-        setAllAuthors(jsondata.authors)
+        console.log('JSON DATA INSIDE GET AUTHORS', jsondata)
+        if(jsondata) {
+          setAllAuthors(jsondata.authors)
+        } else {
+          throw new Error('Something went wrong, Please try again.')
+        }
       })
       .catch(err => {
-        setErrMessage('Darn, the server is down! Please try again later.')
+        setAuthErrMessage('Darn, the server is down! Please try again later.')
         console.error(err)
       });
   }
@@ -68,21 +73,33 @@ function Poem() {
       const getAuthorPoems = () => {
         setIsLoading(true)   
         fetch(`https://poetrydb.org/author/${selectedAuthor}`)
-        .then(response => response.json())
+        .then(response => checkForError(response))
         .then(jsondata => {
           setIsLoading(false)
-          // console.log(jsondata, "ALL AUTHOR POEMS")
-          setSelectedAuthorPoems(jsondata)})
+          if(jsondata.status === 404) {
+            throw new Error('Something went wrong, Please try again.')
+          }
+          console.log('JSON DATA INSIDE GET AUTHOR POEMS', jsondata)
+            if(jsondata) {
+              setSelectedAuthorPoems(jsondata)
+            } else {
+              throw new Error('Something went wrong, Please try again.')
+            }
+        })
         .catch(err => {
-        setErrMessage('Darn, the server is down! Please try again later.')
-        console.error(err)
+          setPoemListErrMessage('Darn, the server is down! Please try again later.')
+          console.error(err)
         });
     }
       getAuthorPoems()
     }
   }, [selectedAuthor])
 
-  let options = allAuthors.map((author, index) => <option key={index} value={author}>{author}</option>)
+  let options
+  if(!!allAuthors.length) {
+    //console.log('THE LENGTH OF ALL AUTHORS', allAuthors.length)
+    options = allAuthors.map((author, index) => <option key={index} value={author}>{author}</option>)
+  }
   
   const makePoetryCards = () => {
    return selectedAuthorPoems.map((poem, index) => {
@@ -99,9 +116,8 @@ function Poem() {
     })
   }
 
-
-  return (
-    <>
+  const renderSelect= () => {
+    return <>
       <label htmlFor="author-select">Choose a poet:</label>
       <select 
         name="author"
@@ -110,11 +126,22 @@ function Poem() {
         <option value=""> Please select another option </option>
         {options}
       </select>
-      {isLoading && <Loading />}
-      <section className='poetry-container'>
-        {!!selectedAuthorPoems.length && makePoetryCards()}
-      </section>
     </>
+  }
+
+  return (
+
+      <> 
+        {renderSelect()}
+      <section className='poetry-container'>
+        {isLoading && <Loading />}
+        {authErrMessage && <Error message={"We weren't able to load authors for you, mate! Try again."} />}
+        {poemListErrMessage && <Error message={"We weren't able to load the poems for you, mate! Try again."} />}
+        {/* {(!isLoading && !authErrMessage) && renderSelect()} */}
+        {(!isLoading && !poemListErrMessage) && !!selectedAuthorPoems.length && makePoetryCards()}
+      </section>
+      </>
   );
 }
 export default Poem;
+// !!selectedAuthorPoems.length
