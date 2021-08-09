@@ -22,7 +22,10 @@ function App() {
         
         //console.log(jsondata, 'INSIDE THE GET POEM FETCH')
         setMainPoem(jsondata[0].lines)})
-      .catch(err => console.error(err));
+        .catch(err => {
+          setErrMessage('Darn, the server is down! Please try again later.')
+          console.error(err)
+        });
 }
 
   useEffect(() => {
