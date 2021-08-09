@@ -8,6 +8,7 @@ import './App.css';
 import { getRandomFromArray } from '../../util';
 import FavoritePoems from '../FavoritePoems/FavoritePoems';
 import Loading from '../Loading/Loading';
+import Error from '../Error/Error';
 
 
 function App() {
@@ -100,9 +101,9 @@ function App() {
           <FavoritePoems />
         </Route>
 
-        {/* <Route exact path ='/loading'>
-          <Loading />
-        </Route> */}
+        <Route exact path ='/error'>
+          <Error />
+        </Route>
 
       </Switch>
       </main>
