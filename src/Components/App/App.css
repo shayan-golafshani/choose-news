@@ -33,11 +33,11 @@
 }
 
 
-a { text-decoration: none; color:white; }
-a:visited { text-decoration: none; color:white; }
-a:hover { text-decoration: none; color:white; }
-a:focus { text-decoration: none; color:white; }
-a:hover, a:active { text-decoration: none; color:white }
+.title-text, a { text-decoration: none; color:white; }
+.title-text, a:visited { text-decoration: none; color:white; }
+.title-text, a:hover { text-decoration: none; color:white; }
+.title-text, a:focus { text-decoration: none; color:white; }
+.title-text, a:hover, a:active { text-decoration: none; color:white }
 
 
 @keyframes App-logo-spin {
