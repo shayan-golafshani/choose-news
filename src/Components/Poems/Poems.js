@@ -3,7 +3,7 @@ import Error from '../Error/Error';
 import PoemCard from '../PoemCard/PoemCard';
 import Loading from '../Loading/Loading';
 import './Poems.css';
-import { checkForError } from '../../util';
+import { getAllAuthors, getPoemsByAuthor } from '../../apiCalls';
 
 function Poem() {
   const [allAuthors, setAllAuthors] = useState([]);
@@ -16,15 +16,7 @@ function Poem() {
   const addToFaves = (e) => {
     let localData = localStorage.getItem('favePoems')
   
-    // if there's nothing in local storage you need to rturn just an empty array
-
-    let matchedPoem = selectedAuthorPoems.filter((poem, index) => {
-      // console.log(`${poem.author}${index}` === e.target.id, "FOUND A MATCH")
-      return `${poem.author}${index}` === e.target.id
-      //index === e.target.id
-    })
-
-    // console.log('match', matchedPoem)
+    let matchedPoem = selectedAuthorPoems.filter((poem, index) => `${poem.author}${index}` === e.target.id)
     
     if(localData) {
       localData = JSON.parse(localData)
@@ -35,7 +27,7 @@ function Poem() {
         localStorage.setItem('favePoems', JSON.stringify(localData));
         return true;
       }
-      //so if this method returns false then, it was already favorited!
+  
       return false;
     } else {
       localStorage.setItem('favePoems', JSON.stringify(matchedPoem));
@@ -45,11 +37,10 @@ function Poem() {
 
   const getAuthors = () => {
       setIsLoading(true)
-      fetch('https://poetrydb.org/author')
-      .then(response => checkForError(response))
+      getAllAuthors()
       .then(jsondata => {
         setIsLoading(false)
-        console.log('JSON DATA INSIDE GET AUTHORS', jsondata)
+        // console.log('JSON DATA INSIDE GET AUTHORS', jsondata)
         if(jsondata.status === 404) {
           throw new Error('Something went wrong, Please try again.')
         }
@@ -61,7 +52,7 @@ function Poem() {
       })
       .catch(err => {
         setAuthErrMessage('Darn, the server is down! Please try again later.')
-        console.error(err)
+        //console.error(err)
       });
   }
   
@@ -75,14 +66,13 @@ function Poem() {
       //console.log('SELECTED AUTHOR inside useEFFECT', selectedAuthor)
       const getAuthorPoems = () => {
         setIsLoading(true)   
-        fetch(`https://poetrydb.org/author/${selectedAuthor}`)
-        .then(response => checkForError(response))
+        getPoemsByAuthor(selectedAuthor)
         .then(jsondata => {
           setIsLoading(false)
           if(jsondata.status === 404) {
             throw new Error('Something went wrong, Please try again.')
           }
-          console.log('JSON DATA INSIDE GET AUTHOR POEMS', jsondata)
+          // console.log('JSON DATA INSIDE GET AUTHOR POEMS', jsondata)
             if(jsondata) {
               setSelectedAuthorPoems(jsondata)
             } else {
@@ -91,7 +81,7 @@ function Poem() {
         })
         .catch(err => {
           setPoemListErrMessage('Darn, the server is down! Please try again later.')
-          console.error(err)
+          // console.error(err)
         });
     }
       getAuthorPoems()
@@ -100,7 +90,6 @@ function Poem() {
 
   let options
   if(!!allAuthors.length) {
-    //console.log('THE LENGTH OF ALL AUTHORS', allAuthors.length)
     options = allAuthors.map((author, index) => <option key={index} value={author}>{author}</option>)
   }
   
@@ -133,18 +122,15 @@ function Poem() {
   }
 
   return (
-
       <> 
         {renderSelect()}
       <section className='poetry-container'>
         {authErrMessage && <Error message={"We weren't able to load authors for you, mate! Try again."} />}
         {poemListErrMessage && <Error message={"We weren't able to load the poems for you, mate! Try again."} />}
         {isLoading && <Loading />}
-        {/* {(!isLoading && !authErrMessage) && renderSelect()} */}
         {(!isLoading && !poemListErrMessage) && !!selectedAuthorPoems.length && makePoetryCards()}
       </section>
       </>
   );
 }
 export default Poem;
-// !!selectedAuthorPoems.length
