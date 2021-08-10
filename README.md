@@ -1,70 +1,98 @@
-# Getting Started with Create React App
+# Tha-Zen!  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Table of Contents
+- [Overview](#overview)
+- [Deployed](#deployed)
+- [Learning Goals](#learning-goals)
+- [Instructions for Viewing](#instructions-for-viewing)
+- [Walkthrough](#walkthrough)
+- [Tech Stack](#tech-stack)
+- [Future Features](#future-features)
+- [Contributors](#contributors)
 
-## Available Scripts
+### Front-End Final Mod 3 Project by: [Shayan Golafshani](https://github.com/shayan-golafshani)
 
-In the project directory, you can run:
+## Overview
+This was the final mod3 project at the Turing School of Software and Design. I decided to make a zen-vibes poetry browser for people who want to explore poetry, while listening to lofi-music, and looking at abstract art. The audience is real niche, probably a little too niche. Here are the links of the User Personas I made when ideating the app. 
+[Persona1](https://docs.google.com/document/d/1VFoHzFE2LR2X0Xfq9lH5kFs4qrvwQ3AncRIwOZWEDAM/edit?usp=sharing)
+[Persona2](https://docs.google.com/document/d/1_PJsbCFfbB_HqptnrRsxO9fWwdqZS0YvPoiElQNzlK4/edit?usp=sharing)
+You can find the spec [here](https://frontend.turing.edu/projects/module-3/niche-audience.html).
 
-### `npm start`
+## Deployed
+The app is deployed to heroku [here](https://tha-zen.herokuapp.com/)!
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Instructions for Viewing Locally 
+  * Clone down this repo by copying the SSH key and from your terminal git clone <repo SSH key>
+  * `npm i` to install dependencies
+  * cd into the repo
+  * `npm start` to activate the server
+  * Open localhost:3000 in your browser to view the project
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+  
+# Learning Goals 
+  * Build upon the foundational skills of React, including use of React Hooks, useEffect and useState.  
+  * Utilizes React Router for url navigation
+  * Demonstart knowledge of error handling and conditional rendering
+  * Retrieve and display poems from https://poetrydb.org and display images from https://thisartworkdoesnotexist.com/
+  * Utilize PropTypes 
+  * End-to-end testing of user flows using Cypress
+  * Local storage use with React Hooks
+  
+# Walkthrough
+  
+- As a user, you are greeted with a landing page that shows you a poem sandwiched some rad spinning art, and an easy-to-listen to lofi beat. 
+  
+[Main Page](https://user-images.githubusercontent.com/70605985/128796662-10e606cc-fd5f-40c4-b83d-93ffd636de22.png)
 
-### `npm test`
+- Next there's a poem selection page, where you can look up poems written by your favorite authors and have those display in scrollable cards!
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Poem Selection Page](https://user-images.githubusercontent.com/70605985/128796870-e6ae629d-dc99-4e2d-8c64-71a0cfcb2255.png)
 
-### `npm run build`
+- Then there's the favorite page! You can look at a list of all the poems you've favorited thus far. These poems persist via local-storage so you don't need to worry about losing them. 
+ ![Favorite Page](https://user-images.githubusercontent.com/70605985/128797149-b86d2612-06cc-4b0c-a896-504864f61507.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   
+- Router Error Handling - Trying to go to a fake url? Don't worry, we'll notify you and you can go back home, you're in good hands 🤲.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![Screen Shot 2021-08-09 at 8 03 08 PM](https://user-images.githubusercontent.com/70605985/128797325-f4799566-3b2d-4036-a80d-337677f5c85c.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+# Tech Stack
+<table>
+  <tr>
+    <td>React w/ Hooks</td>
+    <td>React Router</td>
+    <td>CSS</td>
+    <td>Cypress</td>
+  </tr>
+  <tr>
+    <td><img width="55" src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/react.svg"/></td>
+    <td><img width="55" src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/react-router.svg"/></td>
+    <td><img width="55" src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/css-3.svg"/></td>
+    <td><img width="55" src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/cypress.svg"/></td>
+  </tr>
+</table>
+  
+# Future Features 
+ 
+  - Finish implementing music/ lofi-beats playing page  
+  - Add a meditation timer, that allows you to meditate on a random affirmation
+  - Additional testing of user flows and end to end tests for new features 
+  - Ability to show poems as pre-liked before the user clicks on an already favorited poem
+  
+# Contributors
+ 
+ <table>
+  <tr>
+    <td><a href="https://github.com/shayan-golafshani">Shayan Golafshani</td>
+  </tr>
+  <tr>
+    <td><img width="150" height="auto" src="https://avatars.githubusercontent.com/u/70605985?s=400&u=845dcf52043ae0d597a822d79920631dad6658b0&v=4" alt="Shayan Golafshani avatar"/></td>
+  </tr>
+</table>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Project Managers:  
+  Kayla Wood https://github.com/kaylaewood  
+  Scott Ertmer https://github.com/sertmer
+  
+Turing School of Software & Design 
