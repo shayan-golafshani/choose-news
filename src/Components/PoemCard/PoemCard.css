@@ -6,11 +6,9 @@
     height: 15rem;
     overflow-y: auto;
      
-     /* Standar Syntax */
      animation: soft-rainbow 50s infinite; 
   }
   
-  /* Chrome, Safari, Opera */
   @keyframes soft-rainbow {
     0%{box-shadow: 6px 12px 4px #fefeff;}	
     10%{box-shadow: 6px 12px 4px #fffbff;}	
@@ -37,7 +35,6 @@
 
   .disabled-favorite {
     background: red;  
-    /* border: 1px solid grey; */
     cursor: not-allowed;
   }
 

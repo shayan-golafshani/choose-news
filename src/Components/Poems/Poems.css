@@ -1,6 +1,27 @@
-.poetry-container {
+ @media screen and (min-width: 375px) {
+   .poetry-container {
     padding: 20px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 1rem 2rem;
   }
+}
+
+@media screen and (min-width: 750px) {
+
+   .poetry-container {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem 2rem;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .poetry-container {
+   padding: 20px;
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   gap: 1rem 2rem;
+ }
+}
