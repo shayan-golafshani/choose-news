@@ -40,7 +40,7 @@ The app is deployed to heroku [here](https://tha-zen.herokuapp.com/)!
   
 # Walkthrough
   
-- As a user, you are greeted with a landing page that shows you a poem sandwiched some rad spinning art, and an easy-to-listen to lofi beat. 
+- As a user, you are greeted with a landing page that shows you a poem sandwiched between some rad spinning art, and an easy to listen to lofi beat. 
   
 [Main Page](https://user-images.githubusercontent.com/70605985/128796662-10e606cc-fd5f-40c4-b83d-93ffd636de22.png)
 
