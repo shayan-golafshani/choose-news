@@ -63,9 +63,9 @@ let feelingLuckyPage = (
           </button>
         </NavLink>
 
-        <NavLink to='/poems'>
+        <NavLink to='/categories'>
           <button>
-            Search poems
+            Search news categories
           </button>
         </NavLink>
 
@@ -81,7 +81,7 @@ let feelingLuckyPage = (
           </section>
         </Route>
 
-        <Route exact path ='/poems'>
+        <Route exact path ='/categories'>
           <Poems />
         </Route>
 
