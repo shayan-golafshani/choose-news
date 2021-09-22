@@ -48,8 +48,6 @@ let feelingLuckyPage = (
   </>
 )
 
-console.log(process.env.REACT_APP_API_KEY, 'THIS IS UR API KEY')
-
   return (
     <div className="App">
       <header className="App-header">
