@@ -61,7 +61,9 @@ let feelingLuckyPage = (
   </>
 )
 
-
+  function reload() {
+    window.location.reload(false)
+  }
 
   return (
     <div className="App">
@@ -73,7 +75,8 @@ let feelingLuckyPage = (
         </NavLink>
       <section className='Nav-links'>
         <NavLink to='/'>
-          <button onClick={ () => window.location.reload(false)}>
+          {/* FIX THE NAVIGATION TO the normal spot  */}
+          <button onClick={reload}>
             Feeling lucky!
           </button>
         </NavLink>
