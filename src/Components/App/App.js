@@ -43,7 +43,7 @@ let feelingLuckyPage = (
       <p>{mainArticle.subsection}</p>
       <p>Title: {mainArticle.title}</p>
       <p>{mainArticle.abstract}</p>
-      
+
       <p></p>
     </section >
   </>
