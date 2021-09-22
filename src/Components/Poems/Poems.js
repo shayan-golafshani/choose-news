@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Error from '../Error/Error';
-import PoemCard from '../PoemCard/PoemCard';
+import ArticleCard from '../ArticleCard/ArticleCard';
 import Loading from '../Loading/Loading';
 import './Poems.css';
 import { getArticlesByCat } from '../../apiCalls';
@@ -22,31 +22,33 @@ function Poem() {
             throw new Error('Something went wrong, Please try again.')
           }
             if(jsondata) {
-              setSelectedArticles(jsondata)
+              setSelectedArticles(jsondata.results)
+              console.log('THIS IS THE JSON DATA IN YOUR RESULTS', jsondata.results)
             } else {
               throw new Error('Something went wrong, Please try again.')
             }
         })
         .catch(err => {
-          setPoemListErrMessage('Darn, the server is down! Please try again later.')
+          //fix this portion
+           //setPoemListErrMessage('Darn, the server is down! Please try again later.')
         });
     }
       getArticlesByCategory()
-    
   }, [selectedCat])
 
   
   
   const makePoetryCards = () => {
-   return selectedArticles.map((poem, index) => {
-      return <PoemCard
-      author={poem.author}
-      buttonType={true}
-      index={`${poem.author}${index.toString()}`}
-      key={index}
-      linecount={poem.linecount}
-      lines={poem.lines}
-      title={poem.title}
+   return selectedArticles.map((article, index) => {
+     console.log({article})
+      return <ArticleCard
+        key={index}
+        index={index}
+        abstract={article.abstract}
+        byline={article.byline}
+        date={article.published_date}
+        multimedia={article.multimedia}
+        title={article.title}
       />
     })
   }
