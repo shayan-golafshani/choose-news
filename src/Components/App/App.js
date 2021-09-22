@@ -18,7 +18,6 @@ function App() {
       randomPoem()
       .then(jsondata => {
         setIsLoadingPoem(false)
-        //console.log(jsondata, 'INSIDE THE GET POEM FETCH')
         if(jsondata) {
         setMainPoem(jsondata[0].lines)
         }
@@ -28,7 +27,6 @@ function App() {
       })
         .catch(err => {
           setErrMessage('Darn, the server is down! Please try again later.')
-          // console.error(err)
         });
 }
 
@@ -77,17 +75,6 @@ let feelingLuckyPage = (
           </button>
         </NavLink>
 
-      {/* <NavLink to='/songs'>
-        <button>
-          Songs
-        </button>
-      </NavLink>
-
-      <NavLink to='/zen-zone'>
-        <button>
-          Meditation + Affirmations
-        </button>
-      </NavLink> */}
       </section>
       </header>
       <main>
