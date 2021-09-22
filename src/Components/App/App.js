@@ -7,9 +7,11 @@ import Loading from '../Loading/Loading';
 import Error from '../Error/Error';
 import { randomPoem } from '../../apiCalls';
 import { getRandomFromArray } from '../../util';
+import ImageGallery from 'react-image-gallery';
 
 function App() {
   const [mainArticle, setMainArticle] = useState([]);
+  const [images, setImages] = useState([]);
   const [isLoadingArticle, setIsLoadingArticle] = useState(false);
   const [errMessage, setErrMessage] = useState('');
 
@@ -19,8 +21,15 @@ function App() {
       .then(jsondata => {
         setIsLoadingArticle(false)
         if(jsondata) {
-          console.log('THIS IS WHAT UR GETTING BACK FROM THE API',getRandomFromArray(jsondata.results))
-        setMainArticle(getRandomFromArray(jsondata.results))
+          let results = getRandomFromArray(jsondata.results)
+          let images = results.multimedia.map(img => {
+            return {
+              original: img.url,
+              thumbnail: img.url,
+            }
+          })
+        setImages(images)  
+        setMainArticle(results)
         }
         else {
           throw new Error('Something went wrong, Please try again.')
@@ -34,20 +43,28 @@ function App() {
   useEffect(() => {
     getPoem()
   },[])
+
   
 
 let feelingLuckyPage = (
   <>
     <section className='main-poem'>
-      <p>{mainArticle.section}</p>
-      <p>{mainArticle.subsection}</p>
-      <p>Title: {mainArticle.title}</p>
-      <p>{mainArticle.abstract}</p>
-
-      <p></p>
+      
+        <p>{mainArticle.section}</p>
+        <p>{mainArticle.subsection}</p>
+        <a href={mainArticle.url}>
+          <p>Title: {mainArticle.title}</p>
+        </a>
+       
+        <ImageGallery items={images}/>
+        <p>Title: {mainArticle.title}</p>
+        <p>{mainArticle.abstract}</p>
+      
     </section >
   </>
 )
+
+
 
   return (
     <div className="App">
@@ -59,7 +76,7 @@ let feelingLuckyPage = (
         </NavLink>
       <section className='Nav-links'>
         <NavLink to='/'>
-          <button>
+          <button onClick={ () => window.location.reload(false)}>
             Feeling lucky!
           </button>
         </NavLink>
