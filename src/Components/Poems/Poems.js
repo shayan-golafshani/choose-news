@@ -13,51 +13,51 @@ function Poem() {
   const [authErrMessage, setAuthErrMessage] = useState('');
   const [poemListErrMessage, setPoemListErrMessage] = useState('');
 
-  const addToFaves = (e) => {
-    let localData = localStorage.getItem('favePoems')
+  // const addToFaves = (e) => {
+  //   let localData = localStorage.getItem('favePoems')
   
-    let matchedPoem = selectedAuthorPoems.filter((poem, index) => `${poem.author}${index}` === e.target.id)
+  //   let matchedPoem = selectedAuthorPoems.filter((poem, index) => `${poem.author}${index}` === e.target.id)
     
-    if(localData) {
-      localData = JSON.parse(localData)
-      let found = localData.find(poem => poem.title === matchedPoem[0].title)
+  //   if(localData) {
+  //     localData = JSON.parse(localData)
+  //     let found = localData.find(poem => poem.title === matchedPoem[0].title)
 
-      if(!found) {
-        localData.push(matchedPoem[0])  
-        localStorage.setItem('favePoems', JSON.stringify(localData));
-        return true;
-      }
+  //     if(!found) {
+  //       localData.push(matchedPoem[0])  
+  //       localStorage.setItem('favePoems', JSON.stringify(localData));
+  //       return true;
+  //     }
   
-      return false;
-    } else {
-      localStorage.setItem('favePoems', JSON.stringify(matchedPoem));
-      return true;
-    }
-  }
+  //     return false;
+  //   } else {
+  //     localStorage.setItem('favePoems', JSON.stringify(matchedPoem));
+  //     return true;
+  //   }
+  // }
 
-  const getAuthors = () => {
-      setIsLoading(true)
-      getAllAuthors()
-      .then(jsondata => {
-        setIsLoading(false)
-        // console.log('JSON DATA INSIDE GET AUTHORS', jsondata)
-        if(jsondata.status === 404) {
-          throw new Error('Something went wrong, Please try again.')
-        }
-        if(jsondata) {
-          setAllAuthors(jsondata.authors)
-        } else {
-          throw new Error('Something went wrong, Please try again.')
-        }
-      })
-      .catch(err => {
-        setAuthErrMessage('Darn, the server is down! Please try again later.')
-        //console.error(err)
-      });
-  }
+  // const getAuthors = () => {
+  //     setIsLoading(true)
+  //     getAllAuthors()
+  //     .then(jsondata => {
+  //       setIsLoading(false)
+  //       // console.log('JSON DATA INSIDE GET AUTHORS', jsondata)
+  //       if(jsondata.status === 404) {
+  //         throw new Error('Something went wrong, Please try again.')
+  //       }
+  //       if(jsondata) {
+  //         setAllAuthors(jsondata.authors)
+  //       } else {
+  //         throw new Error('Something went wrong, Please try again.')
+  //       }
+  //     })
+  //     .catch(err => {
+  //       setAuthErrMessage('Darn, the server is down! Please try again later.')
+  //       //console.error(err)
+  //     });
+  // }
   
   useEffect(() => {
-    getAuthors()
+    // getAuthors()
   },[])
   
   useEffect(() => {
@@ -88,15 +88,11 @@ function Poem() {
     }
   }, [selectedAuthor])
 
-  let options
-  if(!!allAuthors.length) {
-    options = allAuthors.map((author, index) => <option key={index} value={author}>{author}</option>)
-  }
+  
   
   const makePoetryCards = () => {
    return selectedAuthorPoems.map((poem, index) => {
       return <PoemCard
-      addToFaves={addToFaves}
       author={poem.author}
       buttonType={true}
       index={`${poem.author}${index.toString()}`}
@@ -110,13 +106,38 @@ function Poem() {
 
   const renderSelect= () => {
     return <>
-      <label htmlFor="author-select">Choose a poet:</label>
+      <label htmlFor="author-select">Choose a catergory:</label>
       <select 
         name="author"
         id="author-select"
         onChange={e => setSelectedAuthor(e.target.value)}>
-        <option value=""> Please select another option </option>
-        {options}
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
+          <option value=""> Please select another option </option>
       </select>
     </>
   }
