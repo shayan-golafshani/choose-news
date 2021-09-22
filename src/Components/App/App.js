@@ -69,12 +69,6 @@ let feelingLuckyPage = (
           </button>
         </NavLink>
 
-        <NavLink to='/favorited-poems'>
-          <button>
-            Fave poems
-          </button>
-        </NavLink>
-
       </section>
       </header>
       <main>
@@ -89,10 +83,6 @@ let feelingLuckyPage = (
 
         <Route exact path ='/poems'>
           <Poems />
-        </Route>
-
-        <Route exact path ='/favorited-poems'>
-          <FavoritePoems />
         </Route>
 
         <Route >
