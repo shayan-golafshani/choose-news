@@ -104,6 +104,36 @@ function Poem() {
     })
   }
 
+  let optionsValues = [
+    'arts',
+    'automobiles',
+    'books',
+    'business', 
+    'fashion', 
+    'food', 
+    'health', 
+    'home', 
+    'insider',
+    'magazine',
+    'movies',
+    'nyregion', 
+    'obituaries', 
+    'opinion',
+    'politics',
+    'realestate',
+    'science',
+    'sports',
+    'sundayreview', 
+    'technology',
+    'theater',
+    't-magazine',
+    'travel', 
+    'upshot',
+    'us',
+    'world']
+
+    let options = optionsValues.map(opt => <option value={`${opt}`}> {opt} </option> )
+
   const renderSelect= () => {
     return <>
       <label htmlFor="author-select">Choose a catergory:</label>
@@ -112,32 +142,7 @@ function Poem() {
         id="author-select"
         onChange={e => setSelectedAuthor(e.target.value)}>
           <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
-          <option value=""> Please select another option </option>
+          {options}
       </select>
     </>
   }
