@@ -6,19 +6,21 @@ import './App.css';
 import Loading from '../Loading/Loading';
 import Error from '../Error/Error';
 import { randomPoem } from '../../apiCalls';
+import { getRandomFromArray } from '../../util';
 
 function App() {
-  const [mainPoem, setMainPoem] = useState([]);
-  const [isLoadingPoem, setIsLoadingPoem] = useState(false);
+  const [mainArticle, setMainArticle] = useState([]);
+  const [isLoadingArticle, setIsLoadingArticle] = useState(false);
   const [errMessage, setErrMessage] = useState('');
 
   const getPoem = () => {
-    setIsLoadingPoem(true)   
+    setIsLoadingArticle(true)   
       randomPoem()
       .then(jsondata => {
-        setIsLoadingPoem(false)
+        setIsLoadingArticle(false)
         if(jsondata) {
-        setMainPoem(jsondata[0].lines)
+          console.log('THIS IS WHAT UR GETTING BACK FROM THE API',getRandomFromArray(jsondata.results))
+        setMainArticle(getRandomFromArray(jsondata.results))
         }
         else {
           throw new Error('Something went wrong, Please try again.')
@@ -32,18 +34,17 @@ function App() {
   useEffect(() => {
     getPoem()
   },[])
-
-  let poem = mainPoem.map((line, index) => {
-    return  <p key={index}>
-              {line}
-            </p>
-  }) 
   
 
 let feelingLuckyPage = (
   <>
     <section className='main-poem'>
-      {poem}
+      <p>{mainArticle.section}</p>
+      <p>{mainArticle.subsection}</p>
+      <p>Title: {mainArticle.title}</p>
+      <p>{mainArticle.abstract}</p>
+      
+      <p></p>
     </section >
   </>
 )
@@ -76,8 +77,8 @@ let feelingLuckyPage = (
         <Route exact path='/'>
           <section className='feeling-lucky-page'>
             {errMessage && <Error message={"We weren't able to grab a random poem for you, mate! Try again."} />}
-            {isLoadingPoem && <Loading />}
-            {(!isLoadingPoem && !errMessage) && feelingLuckyPage}
+            {isLoadingArticle && <Loading />}
+            {(!isLoadingArticle && !errMessage) && feelingLuckyPage}
           </section>
         </Route>
 
