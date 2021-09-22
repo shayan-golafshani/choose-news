@@ -25,7 +25,7 @@ function App() {
           let images = results.multimedia.map(img => {
             return {
               original: img.url,
-              thumbnail: img.url,
+              // thumbnail: img.url,
             }
           })
         setImages(images)  
@@ -52,10 +52,7 @@ let feelingLuckyPage = (
       
         <p>{mainArticle.section}</p>
         <p>{mainArticle.subsection}</p>
-        <a href={mainArticle.url}>
-          <p>Title: {mainArticle.title}</p>
-        </a>
-       
+        <p className='article-title'>Title: <a href={mainArticle.url}>{mainArticle.title}  </a></p>
         <ImageGallery items={images}/>
         <p>Title: {mainArticle.title}</p>
         <p>{mainArticle.abstract}</p>

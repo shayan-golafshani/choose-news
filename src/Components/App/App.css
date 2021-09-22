@@ -67,3 +67,13 @@
   90%{box-shadow: 6px 12px 4px #fffbff;}
   100%{box-shadow: 6px 12px 4px #fefeff;}
 }
+
+p > a {
+  color: black;
+  text-decoration: underline;
+}
+
+p > a:hover {
+  color: blue;
+  text-decoration: none;
+}
