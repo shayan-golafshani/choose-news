@@ -3,7 +3,6 @@ import { Route, Switch, NavLink } from 'react-router-dom';
 import Poems from '../Poems/Poems';
 import './App.css';
 
-import FavoritePoems from '../FavoritePoems/FavoritePoems';
 import Loading from '../Loading/Loading';
 import Error from '../Error/Error';
 import { randomPoem } from '../../apiCalls';
@@ -48,6 +47,9 @@ let feelingLuckyPage = (
     </section >
   </>
 )
+
+console.log(process.env.REACT_APP_API_KEY, 'THIS IS UR API KEY')
+
   return (
     <div className="App">
       <header className="App-header">
