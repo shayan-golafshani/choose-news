@@ -1,7 +1,7 @@
 import { checkForError} from './util';
 
 export function randomPoem(){
-    return fetch('https://poetrydb.org/random')
+    return fetch(`https://api.nytimes.com/svc/topstories/v2/home.json?api-key=${process.env.REACT_APP_API_KEY}`)
       .then(response => checkForError(response))
 }
 
