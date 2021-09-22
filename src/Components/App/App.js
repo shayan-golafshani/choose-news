@@ -5,7 +5,7 @@ import './App.css';
 
 import Loading from '../Loading/Loading';
 import Error from '../Error/Error';
-import { randomPoem } from '../../apiCalls';
+import { randomArticles } from '../../apiCalls';
 import { getRandomFromArray } from '../../util';
 import ImageGallery from 'react-image-gallery';
 
@@ -15,18 +15,15 @@ function App() {
   const [isLoadingArticle, setIsLoadingArticle] = useState(false);
   const [errMessage, setErrMessage] = useState('');
 
-  const getPoem = () => {
+  const getArticle = () => {
     setIsLoadingArticle(true)   
-      randomPoem()
+      randomArticles()
       .then(jsondata => {
         setIsLoadingArticle(false)
         if(jsondata) {
           let results = getRandomFromArray(jsondata.results)
           let images = results.multimedia.map(img => {
-            return {
-              original: img.url,
-              // thumbnail: img.url,
-            }
+            return { original: img.url, }
           })
         setImages(images)  
         setMainArticle(results)
@@ -41,7 +38,7 @@ function App() {
 }
 
   useEffect(() => {
-    getPoem()
+    getArticle()
   },[])
 
   
@@ -70,7 +67,7 @@ let feelingLuckyPage = (
       <header className="App-header">
         <NavLink to='/'>
           <p className='title-text'>
-            Choose your news! 📰
+            Choose your news!
           </p>
         </NavLink>
       <section className='Nav-links'>
@@ -93,7 +90,7 @@ let feelingLuckyPage = (
       <Switch>
         <Route exact path='/'>
           <section className='feeling-lucky-page'>
-            {errMessage && <Error message={"We weren't able to grab a random poem for you, mate! Try again."} />}
+            {errMessage && <Error message={"We weren't able to grab a random article for you, mate! Try again."} />}
             {isLoadingArticle && <Loading />}
             {(!isLoadingArticle && !errMessage) && feelingLuckyPage}
           </section>
