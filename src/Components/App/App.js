@@ -1,11 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import { Route, Switch, NavLink } from 'react-router-dom';
-
-import ReactPlayer from "react-player"
-import { tracks } from '../../data/tracks'
 import Poems from '../Poems/Poems';
 import './App.css';
-import { getRandomFromArray } from '../../util';
+
 import FavoritePoems from '../FavoritePoems/FavoritePoems';
 import Loading from '../Loading/Loading';
 import Error from '../Error/Error';
@@ -48,17 +45,9 @@ function App() {
 
 let feelingLuckyPage = (
   <>
-    <section className="spinning-photo">
-      {<img src='https://thisartworkdoesnotexist.com/' className="App-logo" alt="logo" />}
-    </section>
     <section className='main-poem'>
       {poem}
     </section >
-    <section className='audio-player'>
-      <ReactPlayer
-        url={getRandomFromArray(tracks)}
-      />
-    </section>
   </>
 )
   return (
@@ -66,7 +55,7 @@ let feelingLuckyPage = (
       <header className="App-header">
         <NavLink to='/'>
           <p className='title-text'>
-            Tha-Zen Box! 🌸
+            Choose your news! 📰
           </p>
         </NavLink>
       <section className='Nav-links'>
