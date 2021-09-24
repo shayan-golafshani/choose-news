@@ -1,11 +1,11 @@
+@import "~react-image-gallery/styles/css/image-gallery.css";
+
 .App {
   text-align: center;
 }
 
 .App-logo {
   height: 20vmin;
-  /* Standar Syntax */
-  /* animation: soft-rainbow 50s infinite;  */
 }
 
 
@@ -20,8 +20,7 @@
   color: white;
   font-size: 3em;
   font-family: Arial, Helvetica, sans-serif;
-  /* min-height: 15vh; */
-  /* max-height: 17vh; */
+  
 }
 
 .audio-player {
@@ -64,4 +63,14 @@
   80%{box-shadow: 6px 12px 4px #ebd8d0}
   90%{box-shadow: 6px 12px 4px #fffbff;}
   100%{box-shadow: 6px 12px 4px #fefeff;}
+}
+
+p > a {
+  color: black;
+  text-decoration: underline;
+}
+
+p > a:hover {
+  color: blue;
+  text-decoration: none;
 }

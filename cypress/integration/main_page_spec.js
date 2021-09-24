@@ -1,4 +1,4 @@
-describe('Feeling lucky page', () => {
+describe.skip('Feeling lucky page', () => {
     beforeEach(() => {
         cy.intercept('GET', 'https://poetrydb.org/random', {
         statusCode: 200,

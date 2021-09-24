@@ -1,4 +1,4 @@
-describe('Poem selection page spec', () => {
+describe.skip('Poem selection page spec', () => {
     beforeEach(() => {
         cy.intercept('GET', 'https://poetrydb.org/author', {
         statusCode: 200,

@@ -1,4 +1,4 @@
-describe('Fave poem page spec', () => {
+describe.skip('Fave poem page spec', () => {
     beforeEach(() => {
         cy.visit('http://localhost:3000/favorited-poems')
         cy.contains('You haven\'t favorited any cards yet! Go ❤️ some!')
