@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react';
 import Error from '../Error/Error';
 import ArticleCard from '../ArticleCard/ArticleCard';
 import Loading from '../Loading/Loading';
-import './Poems.css';
+import './Articles.css';
 import { getArticlesByCat } from '../../apiCalls';
 
-function Poem() {
+function Articles() {
   const [selectedCat, setSelectedCat] = useState('');
   const [selectedArticles , setSelectedArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -14,6 +14,9 @@ function Poem() {
   useEffect(() => {
     setSelectedArticles([])
       const getArticlesByCategory = () => {
+        if(selectedCat) {
+
+       
         setIsLoading(true)   
         getArticlesByCat(selectedCat)
         .then(jsondata => {
@@ -32,13 +35,14 @@ function Poem() {
           //fix this portion
            //setPoemListErrMessage('Darn, the server is down! Please try again later.')
         });
+      }
     }
       getArticlesByCategory()
   }, [selectedCat])
 
   
   
-  const makePoetryCards = () => {
+  const makeArticleCards = () => {
    return selectedArticles.map((article, index) => {
      console.log({article})
       return <ArticleCard
@@ -49,6 +53,7 @@ function Poem() {
         date={article.published_date}
         multimedia={article.multimedia}
         title={article.title}
+        url={article.short_url}
       />
     })
   }
@@ -90,7 +95,7 @@ function Poem() {
         name="author"
         id="author-select"
         onChange={e => setSelectedCat(e.target.value)}>
-          <option value=""> Please select another option </option>
+          <option value=""> Please Select an option </option>
           {options}
       </select>
     </>
@@ -102,9 +107,9 @@ function Poem() {
       <section className='poetry-container'>
         {poemListErrMessage && <Error message={"We weren't able to load the articles for you, mate! Try again."} />}
         {isLoading && <Loading />}
-        {(!isLoading && !poemListErrMessage) && !!selectedArticles.length && makePoetryCards()}
+        {(!isLoading && !poemListErrMessage) && !!selectedArticles.length && makeArticleCards()}
       </section>
       </>
   );
 }
-export default Poem;
+export default Articles;
