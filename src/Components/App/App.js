@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import { Route, Switch, NavLink } from 'react-router-dom';
-import Poems from '../Poems/Poems';
 import './App.css';
 
 import Loading from '../Loading/Loading';
@@ -8,6 +7,7 @@ import Error from '../Error/Error';
 import { randomArticles } from '../../apiCalls';
 import { getRandomFromArray } from '../../util';
 import ImageGallery from 'react-image-gallery';
+import Articles from '../Articles/Articles';
 
 function App() {
   const [mainArticle, setMainArticle] = useState([]);
@@ -58,10 +58,6 @@ let feelingLuckyPage = (
   </>
 )
 
-  function reload() {
-    window.location.reload(false)
-  }
-
   return (
     <div className="App">
       <header className="App-header">
@@ -72,8 +68,9 @@ let feelingLuckyPage = (
         </NavLink>
       <section className='Nav-links'>
         <NavLink to='/'>
-          {/* FIX THE NAVIGATION TO the normal spot  */}
-          <button onClick={reload}>
+          <button onClick={() => {
+            getArticle()
+          }}>
             Feeling lucky!
           </button>
         </NavLink>
@@ -97,7 +94,7 @@ let feelingLuckyPage = (
         </Route>
 
         <Route exact path ='/categories'>
-          <Poems />
+          <Articles />
         </Route>
 
         <Route >
