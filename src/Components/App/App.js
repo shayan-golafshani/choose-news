@@ -41,8 +41,6 @@ function App() {
     getArticle()
   },[])
 
-  
-
 let feelingLuckyPage = (
   <>
     <section className='main-poem'>
