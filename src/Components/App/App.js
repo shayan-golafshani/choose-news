@@ -45,8 +45,8 @@ let feelingLuckyPage = (
   <>
     <section className='main-poem'>
       
-        <p>{mainArticle.section}</p>
-        <p>{mainArticle.subsection}</p>
+        <p>Section: {mainArticle.section}</p>
+        <p>Sub-category: {mainArticle.subsection}</p>
         <p className='article-title'>Title: <a href={mainArticle.url}>{mainArticle.title}  </a></p>
         <ImageGallery items={images}/>
         <p>Title: {mainArticle.title}</p>
